@@ -1,0 +1,10 @@
+https://www.mongodb.com/
+
+This is basically the master link to all documentation and
+examples for how to work mongoDB. With the page holding information
+on how to set up basic examples and more indepth
+technical documentation. (Bullets 1 & 2 part 3)
+
+Here is an additional basic setup guide
+https://www.w3schools.com/python/python_mongodb_create_db.asp
+

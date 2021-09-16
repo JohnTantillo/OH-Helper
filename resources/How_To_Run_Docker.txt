@@ -1,0 +1,8 @@
+How to add a program to docker
+
+look at requirements.txt for the format for libraries (such as with Flask)
+with database technologies being able to be added such as the MongoDB example.
+
+
+docker build -t demo .
+docker container run --publish 8080:8000 --detach demo
