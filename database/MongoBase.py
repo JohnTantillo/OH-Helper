@@ -1,12 +1,34 @@
 import pymongo
 
 
-# client = pymongo.MongoClient('mongodb://mongo:27017/') #Mongo DB setup for docker server
-client = pymongo.MongoClient('localhost') #Mongo DB setup for Local host
+client = pymongo.MongoClient('mongodb://mongo:27017/') #Mongo DB setup for docker server
+# client = pymongo.MongoClient('localhost') #Mongo DB setup for Local host
 
 
 Overall_Data = client["CSE442"] #Overall dataset, ie everything in the database
 User_Pointer = Overall_Data["Users"] #Specific Table portion for User's login information
+Statistics_Pointer = Overall_Data["Stats"] #Specific Table portion for User's login information
+
+
+#Used to update a set statistic, name scheme revamp on 9/24/2021 
+def Update_Statistics(Name_of_Stat, new_number):
+    Number_Exist = Statistics_Pointer.count_documents({"Statistic_Name": Name_of_Stat}, limit = 1) #checks to see if the statistic has already been created
+    if Number_Exist == 0:
+        Create_Statistic(Name_of_Stat, 1)
+        return new_number #after created return back original number
+    else:
+        old_statistics = Statistics_Pointer.find({"Statistic_Name": Name_of_Stat}) #finds old row tied to statistic
+        statistic_to_update = 0
+        for i in old_statistics:
+            if i["Statistic_Name"] == Name_of_Stat:
+                statistic_to_update = int(i["Number"])
+        new_statistic = statistic_to_update + new_number
+        Statistics_Pointer.update_one({"Statistic_Name" : Name_of_Stat},{"$set": {"Number": new_statistic}}) #updates new row with that statistic
+        return new_statistic
+
+def Create_Statistic(Name_of_Stat, default_number): #creates new statistic
+    Statistics_Pointer.insert_one({"Statistic_Name" : Name_of_Stat, "Number": default_number})
+
 
 #Registers new account
 #TODO 
