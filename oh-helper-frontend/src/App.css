@@ -1,0 +1,111 @@
+@import "@fontsource/mulish/200.css";
+@import "@fontsource/mulish/300.css";
+@import "./StyleSheets/Login.css";
+
+html {
+  --left-gradient: #e37a12;
+  --right-gradient: #f748c9;
+  --window-background: rgba(0, 0, 0, 0.1);
+  --transparent: rgba(0, 0, 0, 0);
+  --header-color: #ffffff;
+  --button-text-color: #ffffff;
+  --general-font: "Mulish";
+  --text-color: rgba(0,0,0,1);
+  --window-outline: 1px solid rgba(0,0,0,0.2);
+  --line-break-outline: 0.5px solid rgba(0,0,0,0.2);
+  --button-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25), -5px 5px 4px rgba(0, 0, 0, 0.25);
+  --text-outline-color: rgba(0,0,0,0.2);
+  --window-shadow: rgba(0,0,0,0.25);
+  --inactive-button-color: rgba(130, 130, 130, 0.69);
+  --inactive-button-hover: rgba(94, 94, 94, 0.69);
+  --default-button-color: rgba(255, 220, 97, 0.69);
+  --default-button-hover: rgba(168, 145, 62, 0.69);
+  --gradient-angle: 107deg;
+  --text-outline: -1px 0px 0 var(--text-outline-color), 1px 0px 0 var(--text-outline-color), 0px -1px 0 var(--text-outline-color), 0px 1px 0 var(--text-outline-color);
+}
+
+.App {
+  text-align: center;
+  font-family: var(--general-font);
+  background-image: linear-gradient(
+    var(--gradient-angle),
+    var(--left-gradient),
+    var(--right-gradient)
+  );
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.mContent {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.mContentOut {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.iButton {
+  background-color: var(--inactive-button-color);
+  font-family: var(--general-font);
+  font-style: normal;
+  font-weight: 300;
+  color: var(--button-text-color);
+  border-radius: 20px;
+  box-shadow: var(--button-shadow);
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  padding: 0%;
+  margin: 0%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.iButton span {
+  padding-bottom: 0.5vmin;
+}
+
+.iButton:hover {
+  background-color: var(--inactive-button-hover);
+}
+
+.aButton {
+  background-color: var(--default-button-color);
+  font-family: var(--general-font);
+  font-style: normal;
+  font-weight: 300;
+  color: var(--button-text-color);
+  border-radius: 20px;
+  box-shadow: var(--button-shadow);
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  padding: 0%;
+  margin: 0%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.aButton span {
+  padding-bottom: 0.5vmin;
+}
+
+.aButton:hover {
+  background-color: var(--default-button-hover);
+}
