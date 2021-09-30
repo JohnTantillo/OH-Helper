@@ -15,7 +15,7 @@ COPY . .
 # RUN pip install pystrich
 
 # RUN apt-get update --fix-missing
-
+RUN pip install boto
 RUN pip install -r requirements.txt
 
 EXPOSE $PORT
