@@ -1,6 +1,3 @@
-setup:
-  addons:
-    - plan: heroku-mongodb
 build:
   docker:
     web: Dockerfile
