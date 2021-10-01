@@ -1,8 +1,9 @@
 import pymongo
 import os
+import sys
 from boto.s3.connection import S3Connection
 s3 = S3Connection(os.environ['DB_NAME'], os.environ['DB_PASS'])
-print(s3)
+sys.stdout.write(s3)
 client = pymongo.MongoClient("mongodb+srv://heroku_online:<password>@cluster0.hok05.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 # client = pymongo.MongoClient('localhost') #Mongo DB setup for Local host

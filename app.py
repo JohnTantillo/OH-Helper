@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/') 
 def index():
     # total_viewers = MongoBase.Update_Statistics("Total_Users", 1)
-    return 'Hello World! (CSE 442 Team Placeholder) there has been '
+    return "Hello World! (CSE 442 Team Placeholder) there has been"
 
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
