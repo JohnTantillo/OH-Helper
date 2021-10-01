@@ -32,6 +32,13 @@ def Update_Statistics(Name_of_Stat, new_number):
 def Create_Statistic(Name_of_Stat, default_number): #creates new statistic
     Statistics_Pointer.insert_one({"Statistic_Name" : Name_of_Stat, "Number": default_number})
 
+def grabpass(username):
+    onlineStatus = User_Pointer.find({"Username": username})
+    password = ""
+    for i in onlineStatus:
+        if i["Username"] == username:
+            password = i["Password"]
+    return password
 
 #Registers new account
 #TODO 
@@ -39,7 +46,17 @@ def Create_Statistic(Name_of_Stat, default_number): #creates new statistic
 #2 Add Duplication Checks
 #3 Gather what other information we want stored when user is registered from other team members
 
+def checkUsernameUniqueness(Username):
+    UniqueUsers = User_Pointer.count_documents({"Username": Username}, limit = 1)
+    if UniqueUsers == 0:
+        return True
+    else:
+        return False
+
+
 def register(Username, Password_unhashed):
+    if not checkUsernameUniqueness(Username):
+        return False
     User_Pointer.insert_one({"Username" : Username, "Password": Password_unhashed, "Online": False}) #Logs user in with online status of False by default (not logged in)
     return True
 
@@ -58,7 +75,10 @@ def log_out(Username):
 #1 Add A password checker that works with a salted and hashed password
 #2 See if teammates want anything returned to them on login
 
-def log_in(username):
-    User_Pointer.update_one({"Username" : username}, {"$set": {"Online": "True"}}) #Sets user to online
+def log_in(Username, Password):
+    Password_Stored = grabpass(Username)
+    if Password_Stored != Password:
+        return False
+    User_Pointer.update_one({"Username" : Username}, {"$set": {"Online": "True"}}) #Sets user to online
     return True
 
