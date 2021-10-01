@@ -1,24 +1,35 @@
 import React from "react";
 import Button from "./Button.jsx";
+import bcrypt from "bcryptjs";
 
 class LoginPage extends React.Component {
-  
   constructor(props) {
     super(props);
+    this.state = {
+      email: "",
+      password: "",
+    };
     this.login = this.login.bind(this);
     this.createAccount = this.createAccount.bind(this);
-  };
+  }
 
   //TODO: Functions to verify email and password are "valid"
 
   login() {
-    //TODO: implement sending the credentials to the webserver
-    console.log("Logging In!")
-  };
+    var email = this.state.email;
+    bcrypt.hash(this.state.password, 10, function (err, hash) {
+      var b64hash = btoa(hash);
+      fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, password: b64hash }),
+      })
+    });
+  }
 
   createAccount() {
     //TODO: Navigate to create account (this will be likely done through a <Link> tag, not a function)
-    console.log("Creating Account!")
+    console.log("Creating Account!");
   }
 
   render() {
