@@ -54,10 +54,10 @@ def checkUsernameUniqueness(Username):
         return False
 
 
-def register(Username, Password_unhashed):
+def register(Username, Password_unhashed, Classification):
     if not checkUsernameUniqueness(Username):
         return False
-    User_Pointer.insert_one({"Username" : Username, "Password": Password_unhashed, "Online": False}) #Logs user in with online status of False by default (not logged in)
+    User_Pointer.insert_one({"Username" : Username, "Password": Password_unhashed, "Online": False, "Classification": Classification}) #Logs user in with online status of False by default (not logged in)
     return True
 
 #Logs Out an Account based off username
