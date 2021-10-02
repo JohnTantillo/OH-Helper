@@ -9,13 +9,11 @@ class LoginPage extends React.Component {
       email: "",
       password: "",
     };
-    this.login = this.login.bind(this);
-    this.createAccount = this.createAccount.bind(this);
   }
 
   //TODO: Functions to verify email and password are "valid"
 
-  login() {
+  login = () => {
     var email = this.state.email;
     bcrypt.hash(this.state.password, 10, function (err, hash) {
       var b64hash = btoa(hash);
@@ -23,11 +21,19 @@ class LoginPage extends React.Component {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, password: b64hash }),
-      })
+      });
     });
   }
 
-  createAccount() {
+  emailOnChange = (event) => {
+    this.setState({ email: event.target.value });
+  };
+
+  passwordOnChange = (event) => {
+    this.setState({ password: event.target.value });
+  };
+
+  createAccount = () => {
     //TODO: Navigate to create account (this will be likely done through a <Link> tag, not a function)
     console.log("Creating Account!");
   }
@@ -47,6 +53,7 @@ class LoginPage extends React.Component {
               id="email"
               className="emailInput"
               placeholder="Email..."
+              onchange={this.emailOnChange}
             />
             <p className="passwordInputHeader">Password:</p>
             <input
@@ -55,6 +62,7 @@ class LoginPage extends React.Component {
               id="password"
               className="passwordInput"
               placeholder="Password..."
+              onchange={this.passwordOnChange}
             />
             <Button
               active={true}
