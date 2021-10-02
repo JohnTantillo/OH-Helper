@@ -32,6 +32,13 @@ def Update_Statistics(Name_of_Stat, new_number):
 def Create_Statistic(Name_of_Stat, default_number): #creates new statistic
     Statistics_Pointer.insert_one({"Statistic_Name" : Name_of_Stat, "Number": default_number})
 
+
+#Finds corresponding role associated with user
+def Role_Lookup(username):
+    User_Role = User_Pointer.find({"Username": username})
+    return User_Role["Role"]
+
+#Finds corresponding password associated with user
 def grabpass(username):
     onlineStatus = User_Pointer.find({"Username": username})
     password = ""
@@ -53,11 +60,16 @@ def checkUsernameUniqueness(Username):
     else:
         return False
 
+#updates a user's role
+def Role_Update(Username, New_Role):
+    User_Pointer.update_one({"Username" : Username}, {"$set": {"Role": New_Role}}) 
+    return True
 
-def register(Username, Password_unhashed, Classification):
+#registers a user
+def register(Username, Password_unhashed, Classification, Name, Email):
     if not checkUsernameUniqueness(Username):
         return False
-    User_Pointer.insert_one({"Username" : Username, "Password": Password_unhashed, "Online": False, "Classification": Classification}) #Logs user in with online status of False by default (not logged in)
+    User_Pointer.insert_one({"Username" : Username, "Password": Password_unhashed, "Online": False, "Role": Classification, "Name": Name, "Email": Email}) #Logs user in with online status of False by default (not logged in)
     return True
 
 #Logs Out an Account based off username

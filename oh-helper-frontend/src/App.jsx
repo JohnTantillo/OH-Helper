@@ -3,6 +3,7 @@ import React from "react";
 import LoginPage from "./Components/LoginPage";
 import TeacherView from "./Components/TeacherView";
 import StudentView from "./Components/StudentView";
+import CreateAccountPage from "./Components/CreateAccountPage";
 import {
   BrowserRouter as Router,
   Redirect,
@@ -26,6 +27,9 @@ class App extends React.Component {
         <div className="App">
           <div className={this.state.loggedIn ? "mContent" : "mContentOut"}>
             <Switch>
+              <Route path="/createAccount">
+                <CreateAccountPage />
+              </Route>
               <Route path="/">
                 {this.state.loggedIn ? (
                   this.state.student ? (

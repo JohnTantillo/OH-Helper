@@ -1,25 +1,39 @@
 import React from "react";
 import Button from "./Button.jsx";
+import RouteButton from "./RouteButton.jsx";
+import bcrypt from "bcryptjs";
 
 class LoginPage extends React.Component {
-  
   constructor(props) {
     super(props);
-    this.login = this.login.bind(this);
-    this.createAccount = this.createAccount.bind(this);
-  };
+    this.state = {
+      email: "",
+      password: "",
+    };
+  }
 
   //TODO: Functions to verify email and password are "valid"
 
-  login() {
-    //TODO: implement sending the credentials to the webserver
-    console.log("Logging In!")
+  login = () => {
+    var email = this.state.email;
+    bcrypt.hash(this.state.password, 10, function (err, hash) {
+      var b64hash = btoa(hash);
+      fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, password: b64hash }),
+      })
+    })
+    return true;
   };
 
-  createAccount() {
-    //TODO: Navigate to create account (this will be likely done through a <Link> tag, not a function)
-    console.log("Creating Account!")
-  }
+  emailOnChange = (event) => {
+    this.setState({ email: event.target.value });
+  };
+
+  passwordOnChange = (event) => {
+    this.setState({ password: event.target.value });
+  };
 
   render() {
     return (
@@ -29,34 +43,35 @@ class LoginPage extends React.Component {
           <div className="loginWindow">
             <p className="loginHeader">Login/Create Account</p>
             <div className="lineBreak"></div>
-            <p className="emailInputHeader">Email:</p>
+            <p className="email inputHeader">Email:</p>
             <input
               type="email"
               name="email"
               id="email"
-              className="emailInput"
+              className="input"
               placeholder="Email..."
             />
-            <p className="passwordInputHeader">Password:</p>
+            <p className="password inputHeader">Password:</p>
             <input
               type="password"
               name="password"
               id="password"
-              className="passwordInput"
+              className="input"
               placeholder="Password..."
             />
             <Button
               active={true}
-              onclick={() => this.login()}
+              onclick={this.login}
               text="Login"
               buttonType="loginButton"
             ></Button>
-            <Button
+            <RouteButton
               active={true}
-              onclick={() => this.createAccount()}
+              route="/createAccount"
+              onclick={()=>{return true}}
               text="Create Account"
               buttonType="createButton"
-            ></Button>
+            ></RouteButton>
           </div>
         </div>
       </div>

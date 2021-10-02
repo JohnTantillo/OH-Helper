@@ -1,6 +1,7 @@
 @import "@fontsource/mulish/200.css";
 @import "@fontsource/mulish/300.css";
 @import "./StyleSheets/Login.css";
+@import "./StyleSheets//CreateAccount.css";
 
 html {
   --left-gradient: #e37a12;
