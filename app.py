@@ -1,6 +1,7 @@
 from flask import Flask, make_response, Blueprint, send_file, send_from_directory, request, redirect
 from database import MongoBase
 import sys
+import json
 
 html = Blueprint(r'html', __name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -18,7 +19,7 @@ def Login_handle():
     print(request.json)
     Outcome = MongoBase.log_in(request.json["email"],request.json["password"])
     if Outcome[0]:
-        return Outcome # example format [True,"Student"]
+        return json.dumps({'Role': Outcome[1]}) #Student/TA/Instructor
     else:
         return html.send_static_file("index.html")
 
