@@ -1,5 +1,4 @@
 from flask import Flask, make_response, Blueprint, send_file, send_from_directory, request, redirect
-from flask_sockets import Sockets
 from database import MongoBase
 import sys
 
@@ -16,20 +15,26 @@ def serve_index():
 
 @html.route('/login', methods=(["post"]))
 def Login_handle():  
-    Outcome = MongoBase.register(request.json["ubit"],request.json["password"])
-    return Outcome
+    print(request.json)
+    Outcome = MongoBase.log_in(request.json["email"],request.json["password"])
+    if Outcome[0]:
+        return Outcome # example format [True,"Student"]
+    else:
+        return html.send_static_file("index.html")
+
 
 
 @html.route('/role', methods=(["post"]))
 def Role_handle():
-    MongoBase.Role_Update(request.json["ubit"], request.json["role"])
+    MongoBase.Role_Update(request.json["email"], request.json["role"])
+    return True
 
 
 @html.route('/register', methods=(["post"]))
 def Register_handle():
-    Outcome = MongoBase.register(request.json["ubit"],request.json["password"],"Student", request.json["name"], request.json["email"])
+    print(request.json)
+    Outcome = MongoBase.register(request.json["email"],request.json["password"],"Student", request.json["name"], request.json["ubit"])
     return Outcome
-
 
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 app.register_blueprint(html, url_prefix=r'/')
