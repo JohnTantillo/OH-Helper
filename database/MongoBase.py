@@ -94,3 +94,8 @@ def log_in(Email, Password):
     User_Pointer.update_one({"Email" : Email}, {"$set": {"Online": "True"}}) #Sets user to online
     return [True, Role_Lookup(Email)]
 
+
+#This will take in an input from the Teacher'instructor page and remove a course staff
+def remove_course_staff():
+
+    return
