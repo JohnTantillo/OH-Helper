@@ -96,6 +96,7 @@ def log_in(Email, Password):
 
 
 #This will take in an input from the Teacher'instructor page and remove a course staff
-def remove_course_staff():
-
-    return
+#It will return the removed user on completion to be displayed by the font end system
+def remove_course_staff(Email):
+    course_staff_to_remove = User_Pointer.findOneAndDelete({"Email" : Email})
+    return System.out.println(x).toJson
