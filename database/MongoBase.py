@@ -65,6 +65,11 @@ def Role_Update(Email, New_Role):
     User_Pointer.update_one({"Email": Email}, {"$set": {"Role": New_Role}}) 
     return True
 
+# Updates user password when "Forgot Password" pressed 
+def password_update(email, new_password):
+    User_Pointer.update_one({"Email": email}, {"$set": {"Password": new_password}}) 
+    return True
+
 #registers a user
 def register(Email, Password_unhashed, Classification, Name, Ubit):
     if not checkEmailUniqueness(Email):
