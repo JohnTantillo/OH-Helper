@@ -25,7 +25,7 @@ def Login_handle():
 
 
 
-@html.route('/role', methods=(["post"]))
+@html.route('/role', methods=(["post"])) #32
 def Role_handle():
     MongoBase.Role_Update(request.json["email"], request.json["role"])
     return True

@@ -35,7 +35,7 @@ def Create_Statistic(Name_of_Stat, default_number): #creates new statistic
 
 #Finds corresponding role associated with user
 def Role_Lookup(Email):
-    User_Role = User_Pointer.find({"Email": Email})
+    User_Role = User_Pointer.find({"Email": Email})#31
     return User_Role["Role"]
 
 #Finds corresponding password associated with user
