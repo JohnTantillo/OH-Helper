@@ -16,14 +16,17 @@ class LoginPage extends React.Component {
 
   login = () => {
     var email = this.state.email;
-    bcrypt.hash(this.state.password, 10, function (err, hash) {
-      var b64hash = btoa(hash);
-      fetch("/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email, password: b64hash }),
-      })
-    })
+    var pass = this.state.password;
+    bcrypt.genSalt(10, function (err, salt) {
+      bcrypt.hash(pass, salt, function (err, hash) {
+        var b64hash = btoa(hash);
+        fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email, password: b64hash, salt: salt }),
+        });
+      });
+    });
     return true;
   };
 
@@ -50,6 +53,7 @@ class LoginPage extends React.Component {
               id="email"
               className="input"
               placeholder="Email..."
+              onChange={this.emailOnChange}
             />
             <p className="password inputHeader">Password:</p>
             <input
@@ -58,6 +62,7 @@ class LoginPage extends React.Component {
               id="password"
               className="input"
               placeholder="Password..."
+              onChange={this.passwordOnChange}
             />
             <Button
               active={true}
@@ -68,7 +73,9 @@ class LoginPage extends React.Component {
             <RouteButton
               active={true}
               route="/createAccount"
-              onclick={()=>{return true}}
+              onclick={() => {
+                return true;
+              }}
               text="Create Account"
               buttonType="createButton"
             ></RouteButton>
