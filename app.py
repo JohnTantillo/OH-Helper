@@ -18,8 +18,8 @@ def serve_index():
 def Login_handle():  
     print(request.json)
     Outcome = MongoBase.log_in(request.json["email"],request.json["password"])
-    if Outcome[0]:
-        return json.dumps({'Role': Outcome[1]}) #Student/TA/Instructor
+    if bool(Outcome[0]) :
+        return json.dumps({'Role':  str(Outcome[1])}) #Student/TA/Instructor
     else:
         return html.send_static_file("index.html")
 
@@ -34,7 +34,7 @@ def Role_handle():
 @html.route('/register', methods=(["post"]))
 def Register_handle():
     print(request.json)
-    Outcome = MongoBase.register(request.json["email"],request.json["password"],"Student", request.json["name"], request.json["ubit"])
+    Outcome = MongoBase.register(request.json["email"],request.json["password"], request.json["accType"], request.json["name"], request.json["ubit"])
     return Outcome
 
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
@@ -44,7 +44,6 @@ app.register_blueprint(html, url_prefix=r'/')
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000,debug=True)
 
-# RUN THIS VERSION FOR LOCALHOST
 # app = Flask(__name__)
 
 # @app.route('/') 

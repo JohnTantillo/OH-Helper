@@ -72,6 +72,9 @@ def register(Email, Password_unhashed, Classification, Name, Ubit):
     User_Pointer.insert_one({"Email": Email, "Password": Password_unhashed, "Online": False, "Role": Classification, "Name": Name, "Ubit": Ubit}) #Logs user in with online status of False by default (not logged in)
     return True
 
+
+
+
 #Logs Out an Account based off email
 #TODO
 #1 Ask team if any if there is any information they would like changed on logout
