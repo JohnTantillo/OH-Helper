@@ -61,7 +61,7 @@ def checkEmailUniqueness(Email):
         return False
 
 #updates a user's role
-def Role_Update(Email, New_Role):
+def Role_Update(Email, New_Role): #34 Had to delete old branch
     User_Pointer.update_one({"Email": Email}, {"$set": {"Role": New_Role}}) 
     return True
 
