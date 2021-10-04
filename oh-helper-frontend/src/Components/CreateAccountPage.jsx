@@ -38,6 +38,7 @@ export default class CreateAccountPage extends React.Component {
             password: b64hash,
             name: name,
             ubit: ubit,
+            salt: salt,
             accType: accType,
           }),
         });
