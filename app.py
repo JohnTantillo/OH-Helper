@@ -25,7 +25,7 @@ def Login_handle():
 
 
 
-@html.route('/role', methods=(["post"]))
+@html.route('/role', methods=(["post"])) #32
 def Role_handle():
     MongoBase.Role_Update(request.json["email"], request.json["role"])
     return True
@@ -41,8 +41,10 @@ app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path
 app.register_blueprint(html, url_prefix=r'/')
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000,debug=True)
+if __name__ == "__main__":
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+    print(port)
+    app.run(host="0.0.0.0", port=port)
 
 # RUN THIS VERSION FOR LOCALHOST
 # app = Flask(__name__)
