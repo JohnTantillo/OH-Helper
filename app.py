@@ -30,6 +30,15 @@ def Role_handle():
     MongoBase.Role_Update(request.json["email"], request.json["role"])
     return True
 
+@html.route('/role', methods=(["post"]))
+def Role_handle():
+    MongoBase.Role_Update(request.json["email"], request.json["role"])
+    return True
+
+@html.route('/register', methods=(["post"]))
+def password_handle():
+    MongoBase.password_update(request.json["email"], request.json["password"])
+    return True
 
 @html.route('/register', methods=(["post"]))
 def Register_handle():
