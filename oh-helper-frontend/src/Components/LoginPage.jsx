@@ -17,16 +17,14 @@ class LoginPage extends React.Component {
   login = () => {
     var email = this.state.email;
     var pass = this.state.password;
-    bcrypt.genSalt(10, function (err, salt) {
-      bcrypt.hash(pass, salt, function (err, hash) {
+      bcrypt.hash(pass, "", function (err, hash) {
         var b64hash = btoa(hash);
         fetch("/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: email, password: b64hash, salt: salt }),
+          body: JSON.stringify({ email: email, password: b64hash}),
         });
       });
-    });
     return true;
   };
 

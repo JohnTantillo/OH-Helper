@@ -27,8 +27,7 @@ export default class CreateAccountPage extends React.Component {
     if (cPass != pass) {
       return false;
     }
-    bcrypt.genSalt(10, function (err, salt) {
-      bcrypt.hash(pass, salt, function (err, hash) {
+      bcrypt.hash(pass, "", function (err, hash) {
         var b64hash = btoa(hash);
         fetch("/register", {
           method: "POST",
@@ -38,12 +37,10 @@ export default class CreateAccountPage extends React.Component {
             password: b64hash,
             name: name,
             ubit: ubit,
-            salt: salt,
             accType: accType,
           }),
         });
       });
-    });
     return success;
   };
 
