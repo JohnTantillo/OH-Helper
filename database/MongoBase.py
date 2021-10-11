@@ -1,6 +1,9 @@
 import pymongo
 import os
 import sys
+
+#Adding the necessary import for Json usage. 
+import json
 username = os.environ['DB_NAME']
 password = os.environ['DB_PASS']
 client = pymongo.MongoClient("mongodb+srv://heroku_online:" + password +"@cluster0.hok05.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -100,3 +103,10 @@ def log_in(Email, Password):
 def remove_course_staff(Email):
     course_staff_to_remove = User_Pointer.findOneAndDelete({"Email" : Email})
     return System.out.println(x).toJson
+
+
+#This function returnns the message to be used when user that is not registered, or incorrectly entered their username
+#and password do not gain access to the application and returns a message to be displayed on the front end. 
+def confirm_authithenitcate(Email, Password):
+    if (Password != grabpass(Email)) and (checkEmailUniqueness(Email) != False):
+        return System.out.println("Incorrect Username and/or Password.  Please confirm you are registered for this course").toJson
