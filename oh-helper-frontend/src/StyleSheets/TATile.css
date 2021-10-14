@@ -1,0 +1,69 @@
+.lineBreak {
+  height: 0.1vmin;
+  border: var(--line-break-outline);
+  background-color: var(--header-color);
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  width: 80%;
+  margin-bottom: 2vmin;
+}
+
+.taWindow {
+  background-color: rgba(255, 254, 253, 0.36);
+  box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25), -5px 5px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  width: 90%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  margin-top: 3%;
+}
+
+.rightSide {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: center;
+  align-items: center;
+}
+
+.taName {
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-size: 3.5vmin;
+  font-weight: 600;
+  font-style: normal;
+  margin-top: 5%;
+  margin-bottom: 2%;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+}
+.taSpecialties {
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-size: 2.5vmin;
+  font-weight: 400;
+  font-style: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  text-align: left;
+  width: 80%;
+  margin-bottom: 3%;
+}
+
+.taSpecialtiesList {
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-size: 2vmin;
+  font-weight: normal;
+  font-style: normal;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  text-align: left;
+  width: 80%;
+}
+
+.taImage {
+  width: 40%;
+  height: 85%;
+  filter: drop-shadow(5px 0px 4px rgba(0, 0, 0, 0.25))
+    drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 20px 0px;
+}

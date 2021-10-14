@@ -6,10 +6,8 @@ import StudentView from "./Components/StudentView";
 import CreateAccountPage from "./Components/CreateAccountPage";
 import {
   BrowserRouter as Router,
-  Redirect,
   Route,
   Switch,
-  Link,
 } from "react-router-dom";
 
 class App extends React.Component {
@@ -19,6 +17,10 @@ class App extends React.Component {
       loggedIn: false,
       student: true, // default to student privledges
     };
+  }
+
+  setLoginFlag = (student) => {
+    this.setState({loggedIn: true, student: student})
   }
 
   render() {
@@ -38,7 +40,7 @@ class App extends React.Component {
                     <TeacherView /> //TODO: maybe redirects instead?
                   )
                 ) : (
-                  <LoginPage /> //TODO: maybe redirects instead?
+                  <LoginPage loginFlag={this.setLoginFlag} /> //TODO: maybe redirects instead?
                 )}
               </Route>
             </Switch>
