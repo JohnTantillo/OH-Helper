@@ -1,17 +1,17 @@
 import pymongo
 import os
 import sys
+import hashlib
+from random import randint
 username = os.environ['DB_NAME']
 password = os.environ['DB_PASS']
 client = pymongo.MongoClient("mongodb+srv://heroku_online:" + password +"@cluster0.hok05.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 # client = pymongo.MongoClient('localhost') #Mongo DB setup for Local host
 
-
-Overall_Data = client["CSE442"] #Overall dataset, ie everything in the database
+Overall_Data = client["CSE442p"] #Overall dataset, ie everything in the database
 User_Pointer = Overall_Data["Users"] #Specific Table portion for User's login information
 Statistics_Pointer = Overall_Data["Stats"] #Specific Table portion for User's login information
-
 
 #Used to update a set statistic, name scheme revamp on 9/24/2021 
 def Update_Statistics(Name_of_Stat, new_number):
@@ -32,17 +32,29 @@ def Update_Statistics(Name_of_Stat, new_number):
 def Create_Statistic(Name_of_Stat, default_number): #creates new statistic
     Statistics_Pointer.insert_one({"Statistic_Name" : Name_of_Stat, "Number": default_number})
 
-
-#Finds corresponding role associated with user
-def Role_Lookup(Email):
-    User_Role = User_Pointer.find({"Email": Email})
-    return User_Role["Role"]
+#Finds corresponding accType associated with user
+def accType_Lookup(Email):
+    Actypes = User_Pointer.find({"Email": Email})
+    accType = ""
+    for i in Actypes:
+        if i["Email"] == Email:
+            accType= i["accType"]
+    return accType
+    
+def Account_information_public(Email):
+    Userinfo = User_Pointer.find({"Email": Email})
+    for i in Userinfo:
+        if i["Email"] == Email:
+            print("found it")
+            return [i["Name"], i["Ubit"], i["accType"]]
+    print("No i didnt")
+    return []
 
 #Finds corresponding password associated with user
 def grabpass(Email):
-    onlineStatus = User_Pointer.find({"Email": Email})
+    Passonline = User_Pointer.find({"Email": Email})
     password = ""
-    for i in onlineStatus:
+    for i in Passonline:
         if i["Email"] == Email:
             password = i["Password"]
     return password
@@ -60,16 +72,18 @@ def checkEmailUniqueness(Email):
     else:
         return False
 
-#updates a user's role
-def Role_Update(Email, New_Role):
-    User_Pointer.update_one({"Email": Email}, {"$set": {"Role": New_Role}}) 
+#updates a user's acctype
+def accType_Update(Email, accType):
+    User_Pointer.update_one({"Email": Email}, {"$set": {"accType": accType}}) 
     return True
 
 #registers a user
-def register(Email, Password_unhashed, Classification, Name, Ubit):
+def register(Email, Password, Classification, Name, Ubit):
+    salt = randint(10000000, 99999999)
+    salted_hashedpass = str(salt) + Password 
     if not checkEmailUniqueness(Email):
         return False
-    User_Pointer.insert_one({"Email": Email, "Password": Password_unhashed, "Online": False, "Role": Classification, "Name": Name, "Ubit": Ubit}) #Logs user in with online status of False by default (not logged in)
+    User_Pointer.insert_one({"Email": Email, "Password": salted_hashedpass, "Online": False, "accType": Classification, "Name": Name, "Ubit": Ubit}) #Logs user in with online status of False by default (not logged in)
     return True
 
 #Logs Out an Account based off email
@@ -89,8 +103,10 @@ def log_out(Email):
 
 def log_in(Email, Password):
     Password_Stored = grabpass(Email)
-    if Password_Stored != Password:
-        return False
+    storedPass_desalted = Password_Stored[8:]
+    if storedPass_desalted != Password:
+        print([False, "NULL"])
+        return [False, "NULL"]
     User_Pointer.update_one({"Email" : Email}, {"$set": {"Online": "True"}}) #Sets user to online
-    return [True, Role_Lookup(Email)]
-
+    print([True, accType_Lookup(Email)])
+    return [True, accType_Lookup(Email)]
