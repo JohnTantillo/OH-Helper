@@ -23,25 +23,26 @@ export default class CreateAccountPage extends React.Component {
     var pass = this.state.password;
     var accType = this.state.accType;
     var success = true;
-    if (cPass != pass) {
+    if (cPass !== pass) {
       return false;
     }
-    bcrypt.genSalt(10, function (err, salt) {
-      bcrypt.hash(pass, salt, function (err, hash) {
-        var b64hash = btoa(hash);
-        fetch("/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: email,
-            password: b64hash,
-            name: name,
-            ubit: ubit,
-            salt: salt,
-            accType: accType,
-          }),
-        });
-      });
+    // bcrypt.genSalt(10, function (err, salt) {
+    //   bcrypt.hash(pass, salt, function (err, hash) {
+    //     var b64hash = btoa(hash);
+        
+    //   });
+    // });
+    fetch("/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        password: pass,
+        name: name,
+        ubit: ubit,
+        salt: "",
+        accType: accType,
+      }),
     });
     return success;
   };

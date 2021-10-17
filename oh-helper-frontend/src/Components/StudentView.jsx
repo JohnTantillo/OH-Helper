@@ -7,7 +7,7 @@ class StudentView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticket: [],
+      ticket: [{ name: "John Dunaske", question: "Is this a test?" }, { name: "John Dunaske", question: "Is this a test?" }],
       activeTAs: [],
       student: true,
       question: "",
@@ -31,11 +31,12 @@ class StudentView extends React.Component {
           <div className="student headerText">Student Queue</div>
           <div className="studentQueueWindow">
             {this.state.ticket.map((ticket) => {
-              return (<Ticket name={ticket.name} question={ticket.question}></Ticket>)
+              return (<Ticket name={ticket.name} question={ticket.question} admin={false}></Ticket>)
             })}
           </div>
         </div>
-        <div className="rightMaster">
+        <div className="rightMasterStudent">
+          <div className="accountName">{"Welcome, " + this.props.name}</div>
           <div className="activeTA headerText">Active TA's</div>
           <div className="activeTAWindow">
             {this.state.activeTAs.map((ta) => {

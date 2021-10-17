@@ -3,8 +3,8 @@ import os
 import sys
 import hashlib
 from random import randint
-username = os.environ['DB_NAME']
-password = os.environ['DB_PASS']
+username = "heroku_online"#os.environ['DB_NAME']
+password = "yBxnSDgTbS2fUYSE"#os.environ['DB_PASS']
 client = pymongo.MongoClient("mongodb+srv://heroku_online:" + password +"@cluster0.hok05.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 # client = pymongo.MongoClient('localhost') #Mongo DB setup for Local host
@@ -79,11 +79,9 @@ def accType_Update(Email, accType):
 
 #registers a user
 def register(Email, Password, Classification, Name, Ubit):
-    salt = randint(10000000, 99999999)
-    salted_hashedpass = str(salt) + Password 
     if not checkEmailUniqueness(Email):
         return False
-    User_Pointer.insert_one({"Email": Email, "Password": salted_hashedpass, "Online": False, "accType": Classification, "Name": Name, "Ubit": Ubit}) #Logs user in with online status of False by default (not logged in)
+    User_Pointer.insert_one({"Email": Email, "Password": Password, "Online": False, "accType": Classification, "Name": Name, "Ubit": Ubit}) #Logs user in with online status of False by default (not logged in)
     return True
 
 #Logs Out an Account based off email
@@ -103,8 +101,7 @@ def log_out(Email):
 
 def log_in(Email, Password):
     Password_Stored = grabpass(Email)
-    storedPass_desalted = Password_Stored[8:]
-    if storedPass_desalted != Password:
+    if Password_Stored != Password:
         print([False, "NULL"])
         return [False, "NULL"]
     User_Pointer.update_one({"Email" : Email}, {"$set": {"Online": "True"}}) #Sets user to online

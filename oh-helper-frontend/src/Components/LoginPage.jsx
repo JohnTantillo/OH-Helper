@@ -17,17 +17,34 @@ class LoginPage extends React.Component {
   login = () => {
     var email = this.state.email;
     var pass = this.state.password;
-    this.props.loginFlag(false)
+
     // bcrypt.genSalt(10, function (err, salt) {
     //   bcrypt.hash(pass, salt, function (err, hash) {
     //     var b64hash = btoa(hash);
-    //     fetch("/login", {
-    //       method: "POST",
-    //       headers: { "Content-Type": "application/json" },
-    //       body: JSON.stringify({ email: email, password: b64hash, salt: salt }),
-    //     });
+        
     //   });
     // });
+
+    fetch("/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, password: pass, salt:""}),
+    })
+      .then((response) => response != "" ? response.json() : "")
+      .then((success) => {
+        console.log(success)
+        if (success !== "") {
+          if (success.AccType === "teacher") {
+            this.props.loginFlag(true, false, success.Username);
+          } else if (success.AccType === "student") {
+            this.props.loginFlag(true, true, success.Username);
+          } else if (success.AccType === "instructor") {
+            this.props.loginFlag(true, false, success.Username);
+          }
+        } else {
+          this.props.loginFlag(false, false, "");
+        }
+      });
     return true;
   };
 
