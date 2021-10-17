@@ -2,17 +2,21 @@
 @import "@fontsource/mulish/300.css";
 @import "./StyleSheets/Login.css";
 @import "./StyleSheets//CreateAccount.css";
+@import "./StyleSheets/StudentView.css";
+@import "./StyleSheets/TATile.css";
+@import "./StyleSheets/TeacherView.css";
+@import "./StyleSheets//Ticket.css";
 
 html {
   --left-gradient: #e37a12;
   --right-gradient: #f748c9;
-  --window-background: rgba(0, 0, 0, 0.1);
+  --window-background: rgba(0, 0, 0, 0.2);
   --transparent: rgba(0, 0, 0, 0);
   --header-color: #ffffff;
   --button-text-color: #ffffff;
   --general-font: "Mulish";
   --text-color: rgba(0,0,0,1);
-  --window-outline: 1px solid rgba(0,0,0,0.2);
+  --window-outline: 1px solid rgba(0,0,0,0);
   --line-break-outline: 0.5px solid rgba(0,0,0,0.2);
   --button-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25), -5px 5px 4px rgba(0, 0, 0, 0.25);
   --text-outline-color: rgba(0,0,0,0.2);

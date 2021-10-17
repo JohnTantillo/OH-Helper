@@ -8,32 +8,28 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 indexFilepath = "index.html"
 @html.route('/')
-@html.route('/pages/register')
-@html.route('/pages/main')
 def serve_index():
-    return html.send_static_file("index.html") 
-
+    return html.send_static_file("index.html")
 
 @html.route('/login', methods=(["post"]))
-def Login_handle():  
+def Login_handle():
     print(request.json)
     Outcome = MongoBase.log_in(request.json["email"],request.json["password"])
     accType = Outcome[1] #Student/TA/Instructor
     Continue_to_page = Outcome[0] #True or False
     if Continue_to_page:
         print("Yeah It Login")
-        return json.dumps({'Role': accType}) 
+        user_info = MongoBase.Account_information_public(request.json["email"])  #[i["Name"], i["Ubit"], i["accType"]]
+        return json.dumps({'Successful': True, 'AccType': accType, 'Username': user_info[0], 'Ubit': user_info[1]})
     else:
         print("Does Not Login")
-        return html.send_static_file("index.html")
-
+        return json.dumps({'Successful': False, 'AccType': accType, 'Username': "NONE", 'Ubit': "NONE"}) #[i["Name"], i["Ubit"], i["accType"]]
 
 
 @html.route('/role', methods=(["post"])) #32
 def Role_handle():
     MongoBase.Role_Update(request.json["email"], request.json["role"])
     return True
-
 
 @html.route('/register', methods=(["post"]))
 def Register_handle():
@@ -43,7 +39,6 @@ def Register_handle():
 
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 app.register_blueprint(html, url_prefix=r'/')
-
 
 
 
