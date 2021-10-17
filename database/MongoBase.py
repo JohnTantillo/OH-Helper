@@ -3,11 +3,11 @@ import os
 import sys
 import hashlib
 from random import randint
-# username = os.environ['DB_NAME']
-# password = os.environ['DB_PASS']
-# client = pymongo.MongoClient("mongodb+srv://heroku_online:" + password +"@cluster0.hok05.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+username = os.environ['DB_NAME']
+password = os.environ['DB_PASS']
+client = pymongo.MongoClient("mongodb+srv://heroku_online:" + password +"@cluster0.hok05.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
-client = pymongo.MongoClient('localhost') #Mongo DB setup for Local host
+# client = pymongo.MongoClient('localhost') #Mongo DB setup for Local host
 
 Overall_Data = client["CSE442p"] #Overall dataset, ie everything in the database
 User_Pointer = Overall_Data["Users"] #Specific Table portion for User's login information
