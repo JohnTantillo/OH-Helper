@@ -41,6 +41,7 @@ def accType_Lookup(Email):
             accType= i["accType"]
     return accType
 
+    #Gathers all relative account information that can be made public
 def Account_information_public(Email):
     Userinfo = User_Pointer.find({"Email": Email})
     for i in Userinfo:
