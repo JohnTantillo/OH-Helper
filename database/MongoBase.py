@@ -1,3 +1,10 @@
+"""
+Author: Stephen Malinowski
+Purpose: Contains Database Functions for OH-helper
+Technology: Contains imports seen bellow.
+
+"""
+
 import pymongo
 import os
 import sys

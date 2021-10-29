@@ -71,7 +71,7 @@ def socket_helper(socket):
             ind_sockets.send(json.dumps({"users": users}))
     while not socket.closed:                            # While this socket is not closed do the following
         message = socket.receive()
-        socket.send(json.dumps({"Status": "SOCKET CONNECTION WORKING"})) #Here will be where tillos pqueue is sending back stuff (most likely)
+        socket.send(json.dumps({"Status": "SOCKET CONNECTION WORKING", "Cards": [{"Name": "Test", "Question": "Test Question", "Label": "HW TEST"},{"Name": "Test2", "Question": "Test Question", "Label": "HW TEST"}] })) #Here will be where tillos pqueue is sending back stuff (most likely)
     email_to_socket.pop(useremail)                                       #Socket is done so now we are cleaning up old information.....   
     socket_to_email.pop(socket)
     list_of_sockets.remove(socket)
