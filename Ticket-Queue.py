@@ -13,8 +13,13 @@ class Ticket:
     def get_message(self):
         return self.message
 
+    def to_string(self):
+        print("Name: " + self.get_name())
+        print("Priority: " + str(self.get_prios()))
+        print("Issue: " + self.get_message())
+
 if __name__ == "__main__":
     tix = Ticket(1, 'Johntant', 'This is a test')
-    print(tix.get_prios())
-    print(tix.get_name())
-    print(tix.get_message())
+    tix.to_string()
+    tix2 = Ticket(0, '', '') # This shouldn't be possible because of input filtering, but being thorough 
+    tix2.to_string()
