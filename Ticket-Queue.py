@@ -17,7 +17,9 @@ class Ticket:
 
 class PriorityQueue:
     def __init__(self, q):
-        self.q = [Queue()]*4
+        self.q = []
+        for i in range(0,4):
+            self.q.append(Queue())
 
     def insert(self, tic):
         priority = tic.get_prios()
@@ -30,10 +32,15 @@ class PriorityQueue:
             ind += 1
         return self.q[ind].get()
 
+    #TODO: To_string method
+
+    #TODO: Remove a specific element
+
+    #TODO: Write an actual test suite 
+
 if __name__ == "__main__":
     tix = Ticket(1, 'Johntant', 'This is a test')
     tix2 = Ticket(0, 'Me', 'This should be the correct message')
-    print(tix2.get_prios())
     pq = PriorityQueue([])
     pq.insert(tix)
     pq.insert(tix2)
