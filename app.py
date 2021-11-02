@@ -11,10 +11,12 @@ from flask_sockets import Sockets
 import sys
 import json
 
+
 html = Blueprint(r'html', __name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 ws = Blueprint(r'ws', __name__)
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
+Cards = []
 
 indexFilepath = "index.html"
 @html.route('/')
@@ -36,6 +38,23 @@ def Login_handle():
         return json.dumps({'Successful': False, 'AccType': accType, 'Username': "NONE", 'Ubit': "NONE"}) #[i["Name"], i["Ubit"], i["accType"]]
 
 
+@html.route('/password_reset', methods=(["post"])) 
+def Password_Reset_Handle():
+    MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
+    return True
+
+
+ #This is an alternate version to cards
+# @html.route('/new_card', methods=(["post"]))
+# def New_Card():
+#     Card_Person_Name = request.json["Name"]
+#     Card_Issue = request.json["Issue"]
+#     Card_Label = request.json["Label"]
+#     #Tillos function call / jazz with these things
+#     Cards.append({"Name": "Test", "Question": "Test Question", "Label": Card_Label}) #This is a sample appending
+
+
+
 @html.route('/role', methods=(["post"])) #32
 def Role_handle():
     MongoBase.Role_Update(request.json["email"], request.json["role"])
@@ -55,25 +74,25 @@ username_to_cookie = {}
 cookie_to_email = {}
 
 @ws.route('/websocket')
-def socket_helper(socket):
-    useremail = ""                                     #empty variable for tying socket to user_email & Lookups
-    cookie_id = request.cookies.get('cookie_id')        #Cookie given from dunaske
-    if cookie_id in cookie_to_email.keys():        #Searches for cookie in code
-        useremail = cookie_to_email[cookie_id]
-    else:
-        return json.dumps({"ERROR": True})             #Cookie is not associated with any Username... which is a problem thus throw error
-    email_to_socket[useremail] = socket              
-    list_of_sockets.append(socket)                      #Keeps track of sockets
-    socket_to_email[socket] = useremail
-    users = list(email_to_socket.keys())                #Used to organize Amount of users, can be used to help with TAs being online as well
-    for ind_sockets in list_of_sockets:                 #Broadcasts active users on connection immediatly
+def socket_helper(socket):             
+    list_of_sockets.append(socket)                      
+    for ind_sockets in list_of_sockets:                 
         if not ind_sockets.closed:
-            ind_sockets.send(json.dumps({"users": users}))
+            ind_sockets.send(json.dumps({"Cards": Cards})) #Send out current collection of cards
     while not socket.closed:                            # While this socket is not closed do the following
         message = socket.receive()
-        socket.send(json.dumps({"Status": "SOCKET CONNECTION WORKING", "Cards": [{"Name": "Test", "Question": "Test Question", "Label": "HW TEST"},{"Name": "Test2", "Question": "Test Question", "Label": "HW TEST"}] })) #Here will be where tillos pqueue is sending back stuff (most likely)
-    email_to_socket.pop(useremail)                                       #Socket is done so now we are cleaning up old information.....   
-    socket_to_email.pop(socket)
+        if message is not None:
+            dejsonify = json.loads(message) #Takes message assuming it is not empty
+            Card_Person_Name = dejsonify["Name"] #Breakdown of message contents
+            Card_Issue = dejsonify["Issue"]
+            Card_Label = dejsonify["Label"]
+            #Tillos function call / jazz with these things
+            #With the output getting sent in a message looking like the following #HEADS UP JOHN
+            Card_to_be_sent = {"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}
+            Cards.append(Card_to_be_sent) #This is a sample appending
+            for sock in list_of_sockets:
+                if not sock.closed: 
+                    sock.send(json.dumps({Card_to_be_sent})) #tells all sockets to put this in.
     list_of_sockets.remove(socket)
 
     
