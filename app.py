@@ -61,7 +61,7 @@ def Student_Gather():
 
 @html.route('/role', methods=(["post"])) #32
 def Role_handle():
-    MongoBase.Role_Update(request.json["email"], request.json["role"]) #ROLE NEEDS TO BE ALL LOWERCASE EITHER student OR teacher
+    MongoBase.accType_Update(request.json["email"], request.json["role"]) #ROLE NEEDS TO BE ALL LOWERCASE EITHER student OR teacher
     return True
 
 @html.route('/register', methods=(["post"]))
