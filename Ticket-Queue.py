@@ -37,11 +37,29 @@ class PriorityQueue:
             ind += 1
         return self.q[ind].get()
 
-    #TODO: To_string method
+    def to_string(self):
+        for priority in self.q:
+            for ticket in priority.queue:
+                print(ticket.to_string())
 
-    #TODO: Remove a specific element
+    def get_all_info(self):
+        info = {"Queue": []}
+        for priority in self.q:
+            for ticket in priority.queue:
+                info["Queue"].append({"Name": ticket.get_name(), "Priority": ticket.get_prios(), "Message": ticket.get_message()})
+        return info
 
-    #TODO: Write an actual test suite 
+    def remove(self, student):
+        for q in self.q:
+            updated = Queue()
+            prios = -1
+            while not q.empty():
+                tic = q.get()
+                prios = tic.get_prios()
+                if student != tic.get_name():
+                    updated.put(tic)
+            if prios >= 0:
+                self.q[prios] = updated
 
 if __name__ == "__main__":
     tix = Ticket(1, 'Johntant', 'This is a test')
@@ -49,4 +67,8 @@ if __name__ == "__main__":
     pq = PriorityQueue([])
     pq.insert(tix)
     pq.insert(tix2)
-    print(pq.admit_next().get_message())    
+    # print(pq.admit_next().get_message())
+    # pq.insert(tix2)
+    print(pq.get_all_info())
+    pq.remove('Him')
+    print(pq.get_all_info())
