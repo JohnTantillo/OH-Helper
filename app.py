@@ -41,8 +41,12 @@ def Login_handle():
 @html.route('/password_reset', methods=(["post"])) 
 def Password_Reset_Handle():
     MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
-    return True
+    return True                                                                   #Also return a bool for your function here
 
+@html.route('/Students_Online', methods=(["post", "get"])) 
+def Student_Gather():
+    Students = MongoBase.Student_Find()
+    return json.dumps({'online_students': Students}) #Format is "{'online_students': [Jared, Greg, Brielle, Amy, ect....]}"
 
  #This is an alternate version to cards
 # @html.route('/new_card', methods=(["post"]))
@@ -57,7 +61,7 @@ def Password_Reset_Handle():
 
 @html.route('/role', methods=(["post"])) #32
 def Role_handle():
-    MongoBase.Role_Update(request.json["email"], request.json["role"])
+    MongoBase.Role_Update(request.json["email"], request.json["role"]) #ROLE NEEDS TO BE ALL LOWERCASE EITHER student OR teacher
     return True
 
 @html.route('/register', methods=(["post"]))
