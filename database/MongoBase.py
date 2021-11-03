@@ -10,8 +10,8 @@ import os
 import sys
 import hashlib
 from random import randint
-username = os.environ['DB_NAME']
-password = os.environ['DB_PASS']
+username = "heroku_online"#os.environ['DB_NAME']
+password = "yBxnSDgTbS2fUYSE"#os.environ['DB_PASS']
 client = pymongo.MongoClient("mongodb+srv://heroku_online:" + password +"@cluster0.hok05.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 # client = pymongo.MongoClient('localhost') #Mongo DB setup for Local host
@@ -85,12 +85,13 @@ def accType_Update(Email, accType):
     User_Pointer.update_one({"Email": Email}, {"$set": {"accType": accType}})
     return True
 
-def Student_Find():
+def studentFind():
     Userinfo = User_Pointer.find({"Online": "True"})
     Names = []
     for i in Userinfo:
-        if i["accType"] == "student":
-            Names.append(i["Name"])
+        if i["accType"] == "student" or i["accType"] == "teacher":
+            acc = True if i["accType"] == "teacher" or i["accType"] == "instructor" else False
+            Names.append({'name':i["Name"], 'accType':acc, 'email':i["Email"]})
     return Names
 
 

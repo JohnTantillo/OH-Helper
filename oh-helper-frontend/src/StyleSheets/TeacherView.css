@@ -67,10 +67,10 @@
   font-style: normal;
   font-weight: 300;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
-  font-size: 3vmin;
+  font-size: 2.7vmin;
   width: 31vw;
   text-align: left;
-  margin-top: 2vh;
+  margin-top: 1vh;
   margin-bottom: 1vh;
 }
 
@@ -94,19 +94,40 @@
   margin-bottom: 1vh;
 }
 
+.accountName {
+  margin: 0;
+  font-family: var(--general-font);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  font-size: 3vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .search {
-    width: 7vw;
-    height: 5vh;
-    font-family: var(--general-font);
-    font-weight: 200;
-    font-size: 2.5vmin;
-    color: var(--header-color);
+  background-color: rgba(239, 153, 90, 0.83) !important;
+  width: 7vw;
+  height: 5vh;
+  font-family: var(--general-font);
+  font-weight: 400 !important;
+  font-size: 2.5vmin;
+  color: var(--header-color);
+}
+
+.taButton {
+  background-color: rgba(239, 153, 90, 0.83) !important;
+  height: 5vh;
+  width: 35vw;
+  font-family: var(--general-font);
+  font-weight: 200;
+  font-size: 2.5vmin;
+  color: var(--header-color);
 }
 
 .resultsContainer {
-    padding-top: 2vh;
-    width: 33vw;
-    height: 76.5vh;
+  padding-top: 2vh;
+  width: 33vw;
+  height: 76.5vh;
 }
 
 .teacherQueueWindow::-webkit-scrollbar {

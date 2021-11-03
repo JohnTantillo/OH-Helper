@@ -4,11 +4,8 @@ import LoginPage from "./Components/LoginPage";
 import TeacherView from "./Components/TeacherView";
 import StudentView from "./Components/StudentView";
 import CreateAccountPage from "./Components/CreateAccountPage";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
+import TASelectPage from "./Components/TASelectPage";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -21,8 +18,8 @@ class App extends React.Component {
   }
 
   setLoginFlag = (login, student, name) => {
-    this.setState({loggedIn: login, student: student, name: name})
-  }
+    this.setState({ loggedIn: login, student: student, name: name });
+  };
 
   render() {
     return (
@@ -33,12 +30,15 @@ class App extends React.Component {
               <Route path="/createAccount">
                 <CreateAccountPage />
               </Route>
+              <Route path="/taSelector">
+                <TASelectPage />
+              </Route>
               <Route path="/">
                 {this.state.loggedIn ? (
                   this.state.student ? (
-                    <StudentView name={this.state.name}/> //TODO: maybe redirects instead?
+                    <StudentView name={this.state.name} /> //TODO: maybe redirects instead?
                   ) : (
-                    <TeacherView name={this.state.name}/> //TODO: maybe redirects instead?
+                    <TeacherView name={this.state.name} /> //TODO: maybe redirects instead?
                   )
                 ) : (
                   <LoginPage loginFlag={this.setLoginFlag} /> //TODO: maybe redirects instead?

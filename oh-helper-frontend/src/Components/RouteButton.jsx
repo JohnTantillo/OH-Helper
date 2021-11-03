@@ -21,7 +21,9 @@ export default function Button(props) {
       onClick={
         props.active
           ? () => {
-              props.onclick() ? history.push(props.route) : alert("Something went wrong.")
+              props.onclick()
+                ? history.push(props.route)
+                : alert("Something went wrong.");
             }
           : () => {}
       }

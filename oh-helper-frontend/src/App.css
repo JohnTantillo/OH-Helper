@@ -5,7 +5,8 @@
 @import "./StyleSheets/StudentView.css";
 @import "./StyleSheets/TATile.css";
 @import "./StyleSheets/TeacherView.css";
-@import "./StyleSheets//Ticket.css";
+@import "./StyleSheets/Ticket.css";
+@import "./StyleSheets/TASelect.css";
 
 html {
   --left-gradient: #e37a12;

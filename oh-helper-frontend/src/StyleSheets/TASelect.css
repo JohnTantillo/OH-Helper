@@ -1,0 +1,141 @@
+.pageContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.outerShell {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.selectContainer {
+  width: 85vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: -5px 0px 4px rgba(0, 0, 0, 0.25), 5px 5px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.studentOption {
+  width: 80vw;
+  height: 11vh;
+  background-color: rgba(239, 153, 90, 0.83);
+  box-shadow: 5px 0px 4px rgba(0, 0, 0, 0.2), -5px 5px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.leftController {
+  width: 20vw;
+  height: 10vh;
+  display: flex;
+  margin-left: 2vw;
+  flex-direction: column;
+}
+
+.studentName {
+  width: 20vw;
+  height: 6vh;
+  border: 0;
+  color: var(--header-color);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  font-size: 3.5vmin;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.studentEmail {
+  width: 20vw;
+  height: 4vh;
+  border: 0;
+  color: var(--header-color);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  font-size: 2.7vmin;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+}
+
+.buttonContainer {
+  width: 55vw;
+  height: 11vh;
+  display: flex;
+  justify-content: right;
+  margin-right: 3vw;
+}
+
+.selectButton {
+  background-color: rgba(255, 198, 144, 0.69) !important;
+  width: 15vw;
+  height: 7vh;
+  font-size: 5vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backButton {
+  background-color: rgba(239, 153, 90, 0.83) !important;
+  width: 10vw;
+  height: 5vh;
+  margin-top: 1vh !important;
+  margin-left: 1vw !important;
+  font-size: 3vmin;
+  font-weight: 600 !important;
+}
+
+.selectedButton {
+  background-color: rgba(117, 116, 115, 0.69) !important;
+  width: 15vw;
+  height: 7vh;
+  font-size: 5vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selectedOption {
+  background-color: rgba(69, 69, 69, 0.69) !important;
+}
+
+.selectButton:hover {
+  background-color: rgba(181, 141, 103, 0.69) !important;
+}
+
+.selectContainer::-webkit-scrollbar {
+  display: block;
+  width: 1vmin;
+}
+
+.selectContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.selectContainer::-webkit-scrollbar-thumb {
+  background-color: var(--window-background);
+  border-radius: 20px;
+}
+
+.selectContainer::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 2vmin;
+}
+
+.selectContainer::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 2vmin;
+}
