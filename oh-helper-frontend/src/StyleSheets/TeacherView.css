@@ -1,0 +1,155 @@
+.teacherViewContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.teacherQueueContainer {
+  width: 60vw;
+  height: 96vh;
+  margin-left: 1vw;
+  margin-top: 1vh;
+  margin-right: 3vw;
+}
+
+.teacher {
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-style: normal;
+  font-weight: 300;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  background-color: var(--window-background);
+  border-radius: 20px;
+  font-size: 5vmin;
+  align-items: center;
+  text-align: center;
+  width: 60vw;
+  height: 6.8vh;
+  margin-bottom: 1vh;
+}
+
+.teacherQueueWindow {
+  width: 60vw;
+  height: 88vh;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  background-color: var(--window-background);
+  border-radius: 20px;
+  font-size: 5vmin;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rightMaster {
+  width: 35vw;
+  height: 96vh;
+  margin-right: 1vw;
+  margin-top: 1vh;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  background-color: var(--window-background);
+  border-radius: 20px;
+  align-items: center;
+}
+
+.studentSearchHeader {
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-style: normal;
+  font-weight: 300;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  font-size: 2.7vmin;
+  width: 31vw;
+  text-align: left;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+.studentSearchBar {
+  text-align: left;
+  width: 30vw;
+  font-size: 2vmin;
+  font-family: var(--general-font);
+  font-weight: 300;
+  font-style: normal;
+  color: var(--text-color);
+  background-color: var(--header-color);
+  border-radius: 20px;
+  border: 0px;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  padding-left: 1vw;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  margin-top: 0.1vh;
+  margin-bottom: 1vh;
+}
+
+.accountName {
+  margin: 0;
+  font-family: var(--general-font);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  font-size: 3vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search {
+  background-color: rgba(239, 153, 90, 0.83) !important;
+  width: 7vw;
+  height: 5vh;
+  font-family: var(--general-font);
+  font-weight: 400 !important;
+  font-size: 2.5vmin;
+  color: var(--header-color);
+}
+
+.taButton {
+  background-color: rgba(239, 153, 90, 0.83) !important;
+  height: 5vh;
+  width: 35vw;
+  font-family: var(--general-font);
+  font-weight: 200;
+  font-size: 2.5vmin;
+  color: var(--header-color);
+}
+
+.resultsContainer {
+  padding-top: 2vh;
+  width: 33vw;
+  height: 76.5vh;
+}
+
+.teacherQueueWindow::-webkit-scrollbar {
+  display: block;
+  width: 1vmin;
+}
+
+.teacherQueueWindow::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.teacherQueueWindow::-webkit-scrollbar-thumb {
+  background-color: var(--window-background);
+  border-radius: 20px;
+}
+
+.teacherQueueWindow::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 2vmin;
+}
+
+.teacherQueueWindow::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 2vmin;
+}

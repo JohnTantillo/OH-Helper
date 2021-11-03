@@ -1,4 +1,3 @@
-def test1():
-    print("hello world")
+import MongoBase as db
 
-test1()       
+print(db.Student_Find())

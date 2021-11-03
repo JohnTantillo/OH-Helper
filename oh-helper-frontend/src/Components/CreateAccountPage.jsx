@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "./Button.jsx";
 import RouteButton from "./RouteButton.jsx";
 import bcrypt from "bcryptjs";
 
@@ -12,6 +11,7 @@ export default class CreateAccountPage extends React.Component {
       password: "",
       confirmPass: "",
       ubit: "",
+      accType: "student",
     };
   }
 
@@ -20,22 +20,29 @@ export default class CreateAccountPage extends React.Component {
     var email = this.state.email;
     var ubit = this.state.ubit;
     var cPass = this.state.confirmPass;
+    var pass = this.state.password;
+    var accType = this.state.accType;
     var success = true;
-    if (cPass != this.state.password) {
-        return false;
+    if (cPass !== pass) {
+      return false;
     }
-    bcrypt.hash(this.state.password, 10, function (err, hash) {
-      var b64hash = btoa(hash);
-      fetch("/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          password: b64hash,
-          name: name,
-          ubit: ubit,
-        }),
-      });
+    // bcrypt.genSalt(10, function (err, salt) {
+    //   bcrypt.hash(pass, salt, function (err, hash) {
+    //     var b64hash = btoa(hash);
+
+    //   });
+    // });
+    fetch("/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        password: pass,
+        name: name,
+        ubit: ubit,
+        salt: "",
+        accType: accType,
+      }),
     });
     return success;
   };
@@ -57,6 +64,10 @@ export default class CreateAccountPage extends React.Component {
 
   ubitOnChange = (event) => {
     this.setState({ ubit: event.target.value });
+  };
+
+  accTypeOnChange = (event) => {
+    this.setState({ accType: event.target.value });
   };
 
   render() {
@@ -102,6 +113,14 @@ export default class CreateAccountPage extends React.Component {
               placeholder="UBIT..."
               onChange={this.ubitOnChange}
             />
+            <p className="accType inputHeader">Account Type:</p>
+            <select
+              className="accountType dropdown"
+              onChange={this.accTypeOnChange}
+            >
+              <option value="student"> Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
             <RouteButton
               active={true}
               route="/"
