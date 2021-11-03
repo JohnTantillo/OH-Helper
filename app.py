@@ -38,10 +38,10 @@ def loginHandle():
         return json.dumps({'Successful': False, 'AccType': accType, 'Username': "NONE", 'Ubit': "NONE"}) #[i["Name"], i["Ubit"], i["accType"]]
 
 
-# @html.route('/passwordReset', methods=(["post"])) 
-# def passwordResetHandle():
-#     MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
-#     return json.dumps({'success': True})                                                                   #Also return a bool for your function here
+@html.route('/passwordReset', methods=(["post"])) 
+def passwordResetHandle():
+    MongoBase.password_reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
+    return json.dumps({'success': True})                                                                   #Also return a bool for your function here
 
 @html.route('/getStudents', methods=(["post"])) 
 def studentGetter():
