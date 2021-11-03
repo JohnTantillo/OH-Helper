@@ -85,12 +85,6 @@ def accType_Update(Email, accType):
     User_Pointer.update_one({"Email": Email}, {"$set": {"accType": accType}})
     return True
 
-<<<<<<< HEAD
-# Updates user password when "Forgot Password" pressed 
-def password_update(email, new_password):
-    User_Pointer.update_one({"Email": email}, {"$set": {"Password": new_password}}) 
-    return True
-=======
 def studentFind():
     Userinfo = User_Pointer.find({"Online": "True"})
     Names = []
@@ -100,8 +94,10 @@ def studentFind():
             Names.append({'name':i["Name"], 'accType':acc, 'email':i["Email"]})
     return Names
 
-
->>>>>>> develop
+# Updates user password when "Forgot Password" pressed
+def password_reset(email, new_password):
+    User_Pointer.update_one({"Email": email}, {"$set": {"Password": new_password}})
+    return True
 
 #registers a user
 def register(Email, Password, Classification, Name, Ubit):
