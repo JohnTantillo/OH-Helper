@@ -107,15 +107,15 @@ sockets.register_blueprint(ws, url_prefix=r'/')
 
 
 #RUN THIS VERSION FOR LOCALHOST
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000,debug=True)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=8000,debug=True)
 
 #Run THIS VERSION FOR HEROKU
 
-# if __name__ == "__main__":
-#     from gevent import pywsgi
-#     from geventwebsocket.handler import WebSocketHandler
-#     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
-#     server = pywsgi.WSGIServer(('', port), app, handler_class=WebSocketHandler)
-#     server.serve_forever()
+if __name__ == "__main__":
+    from gevent import pywsgi
+    from geventwebsocket.handler import WebSocketHandler
+    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+    server = pywsgi.WSGIServer(('', port), app, handler_class=WebSocketHandler)
+    server.serve_forever()
     
