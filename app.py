@@ -10,12 +10,14 @@ from database import MongoBase
 from flask_sockets import Sockets
 import sys
 import json
+import Ticket
+import PriorityQueue
 
 
 html = Blueprint(r'html', __name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 ws = Blueprint(r'ws', __name__)
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
-
+student_queue = PriorityQueue([])
 
 indexFilepath = "index.html"
 @html.route('/')
@@ -82,14 +84,15 @@ def socket_helper(socket):
     list_of_sockets.append(socket)                      
     for ind_sockets in list_of_sockets:                 
         if not ind_sockets.closed:
-            ind_sockets.send(json.dumps({"Cards": Cards_Backlog})) #Send out current collection of cards
+            ind_sockets.send(json.dumps({"Cards": Cards_Backlog})) #Send out current collection of cards # This may need to be changed to student_queue
     while not socket.closed:                            # While this socket is not closed do the following
         message = socket.receive()
         if message is not None:
             Message_Breakdown(message)
             for sock in list_of_sockets:
                 if not sock.closed: 
-                    sock.send(json.dumps({Cards_Backlog})) #tells all sockets to put this in.
+                    sock.send(json.dumps(student_queue.get_all_info()))
+                    # sock.send(json.dumps({Cards_Backlog})) #tells all sockets to put this in.
         list_of_sockets.remove(socket)
 
 
@@ -105,10 +108,13 @@ def Message_Breakdown(message):
     #With the output getting sent in a message looking like the following #HEADS UP JOHN
     if Card_Action == "Remove":
         #Tillo Does Remove Here
-        Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}] 
+        student_queue.admit_next()
+        # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}] 
     if Card_Action == "Add":
         #Tillo Does Add Here
-        Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}] 
+        tic = Ticket(Card_Label, Card_Person_Name, Card_Issue)
+        student_queue.insert(tic)
+        # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}] 
     
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 sockets = Sockets(app)
