@@ -92,12 +92,8 @@ def socket_helper(socket):
                     sock.send(json.dumps({Cards_Backlog})) #tells all sockets to put this in.
         list_of_sockets.remove(socket)
 
-    
-app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
-sockets = Sockets(app)
-app.register_blueprint(html, url_prefix=r'/')
-sockets.register_blueprint(ws, url_prefix=r'/')
 
+#breaks down socket message and directs accordingly
 def Message_Breakdown(message):
     global Cards_Backlog
     dejsonify = json.loads(message) #Takes message assuming it is not empty
@@ -113,6 +109,11 @@ def Message_Breakdown(message):
     if Card_Action == "Add":
         #Tillo Does Add Here
         Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}] 
+    
+app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
+sockets = Sockets(app)
+app.register_blueprint(html, url_prefix=r'/')
+sockets.register_blueprint(ws, url_prefix=r'/')
 
 # RUN THIS VERSION FOR LOCALHOST
 # if __name__ == '__main__':
