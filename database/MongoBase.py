@@ -85,6 +85,17 @@ def accType_Update(Email, accType):
     User_Pointer.update_one({"Email": Email}, {"$set": {"accType": accType}})
     return True
 
+def studentFind():
+    Userinfo = User_Pointer.find({"Online": "True"})
+    Names = []
+    for i in Userinfo:
+        if i["accType"] == "student" or i["accType"] == "teacher":
+            acc = True if i["accType"] == "teacher" or i["accType"] == "instructor" else False
+            Names.append({'name':i["Name"], 'accType':acc, 'email':i["Email"]})
+    return Names
+
+
+
 #registers a user
 def register(Email, Password, Classification, Name, Ubit):
     if not checkEmailUniqueness(Email):

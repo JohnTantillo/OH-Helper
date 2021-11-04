@@ -32,7 +32,6 @@ class LoginPage extends React.Component {
     })
       .then((response) => response != "" ? response.json() : "")
       .then((success) => {
-        console.log(success)
         if (success !== "") {
           if (success.AccType === "teacher") {
             this.props.loginFlag(true, false, success.Username);
@@ -45,6 +44,7 @@ class LoginPage extends React.Component {
           this.props.loginFlag(false, false, "");
         }
       });
+    //this.props.loginFlag(true, false, "Jesse Hartloff");
     return true;
   };
 

@@ -20,11 +20,11 @@ Cards = []
 
 indexFilepath = "index.html"
 @html.route('/')
-def serve_index():
+def serveIndex():
     return html.send_static_file("index.html")
 
 @html.route('/login', methods=(["post"]))
-def Login_handle():
+def loginHandle():
     print(request.json)
     Outcome = MongoBase.log_in(request.json["email"],request.json["password"])
     accType = Outcome[1] #Student/TA/Instructor
@@ -38,11 +38,15 @@ def Login_handle():
         return json.dumps({'Successful': False, 'AccType': accType, 'Username': "NONE", 'Ubit': "NONE"}) #[i["Name"], i["Ubit"], i["accType"]]
 
 
-@html.route('/password_reset', methods=(["post"])) 
-def Password_Reset_Handle():
-    MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
-    return True
+# @html.route('/passwordReset', methods=(["post"])) 
+# def passwordResetHandle():
+#     MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
+#     return json.dumps({'success': True})                                                                   #Also return a bool for your function here
 
+@html.route('/getStudents', methods=(["post"])) 
+def studentGetter():
+    Students = MongoBase.studentFind()
+    return json.dumps(Students) #Format is "{'online_students': [studentObject]}"
 
  #This is an alternate version to cards
 # @html.route('/new_card', methods=(["post"]))
@@ -56,12 +60,12 @@ def Password_Reset_Handle():
 
 
 @html.route('/role', methods=(["post"])) #32
-def Role_handle():
-    MongoBase.Role_Update(request.json["email"], request.json["role"])
-    return True
+def roleHandle():
+    MongoBase.accType_Update(request.json["email"], request.json["role"]) #ROLE NEEDS TO BE ALL LOWERCASE EITHER student OR teacher
+    return json.dumps({"success" : True})
 
 @html.route('/register', methods=(["post"]))
-def Register_handle():
+def registerHandle():
     print(request.json)
     MongoBase.register(request.json["email"],request.json["password"], request.json["accType"], request.json["name"], request.json["ubit"])
     return redirect('/login')
@@ -102,7 +106,7 @@ app.register_blueprint(html, url_prefix=r'/')
 sockets.register_blueprint(ws, url_prefix=r'/')
 
 
-# RUN THIS VERSION FOR LOCALHOST
+#RUN THIS VERSION FOR LOCALHOST
 # if __name__ == '__main__':
 #     app.run(host='0.0.0.0', port=8000,debug=True)
 
