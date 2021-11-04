@@ -35,6 +35,8 @@ class PriorityQueue:
         ind = 0
         while self.q[ind].empty():
             ind += 1
+            if ind > 3:
+                return None
         return self.q[ind].get()
 
     def to_string(self):
@@ -72,3 +74,5 @@ if __name__ == "__main__":
     print(pq.get_all_info())
     pq.remove('Him')
     print(pq.get_all_info())
+    pq2 = PriorityQueue([])
+    print(pq2.admit_next())
