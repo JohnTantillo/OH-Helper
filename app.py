@@ -16,7 +16,6 @@ html = Blueprint(r'html', __name__, static_folder="oh-helper-frontend/build/", s
 ws = Blueprint(r'ws', __name__)
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
-Cards = []
 
 indexFilepath = "index.html"
 @html.route('/')
@@ -38,10 +37,10 @@ def loginHandle():
         return json.dumps({'Successful': False, 'AccType': accType, 'Username': "NONE", 'Ubit': "NONE"}) #[i["Name"], i["Ubit"], i["accType"]]
 
 
-# @html.route('/passwordReset', methods=(["post"])) 
-# def passwordResetHandle():
-#     MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
-#     return json.dumps({'success': True})                                                                   #Also return a bool for your function here
+@html.route('/password_reset', methods=(["post"])) 
+def Password_Reset_Handle():
+    # MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
+    return True                                                                   #Also return a bool for your function here
 
 @html.route('/getStudents', methods=(["post"])) 
 def studentGetter():
@@ -74,39 +73,49 @@ email_to_socket = {}
 username_to_team = {}
 list_of_sockets = []
 socket_to_email = {}
-username_to_cookie = {}
-cookie_to_email = {}
+Cards_Backlog = []
+
 
 @ws.route('/websocket')
 def socket_helper(socket):             
+    global Cards_Backlog
     list_of_sockets.append(socket)                      
     for ind_sockets in list_of_sockets:                 
         if not ind_sockets.closed:
-            ind_sockets.send(json.dumps({"Cards": Cards})) #Send out current collection of cards
+            ind_sockets.send(json.dumps({"Cards": Cards_Backlog})) #Send out current collection of cards
     while not socket.closed:                            # While this socket is not closed do the following
         message = socket.receive()
         if message is not None:
-            dejsonify = json.loads(message) #Takes message assuming it is not empty
-            Card_Person_Name = dejsonify["Name"] #Breakdown of message contents
-            Card_Issue = dejsonify["Issue"]
-            Card_Label = dejsonify["Label"]
-            #Tillos function call / jazz with these things
-            #With the output getting sent in a message looking like the following #HEADS UP JOHN
-            Card_to_be_sent = {"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}
-            Cards.append(Card_to_be_sent) #This is a sample appending
+            Message_Breakdown(message)
             for sock in list_of_sockets:
                 if not sock.closed: 
-                    sock.send(json.dumps({Card_to_be_sent})) #tells all sockets to put this in.
-    list_of_sockets.remove(socket)
+                    sock.send(json.dumps({Cards_Backlog})) #tells all sockets to put this in.
+        list_of_sockets.remove(socket)
 
+
+#breaks down socket message and directs accordingly
+def Message_Breakdown(message):
+    global Cards_Backlog
+    dejsonify = json.loads(message) #Takes message assuming it is not empty
+    Card_Person_Name = dejsonify["Name"] #Breakdown of message contents
+    Card_Issue = dejsonify["Issue"]
+    Card_Label = dejsonify["Label"]
+    Card_Action = dejsonify["Action"]
+    #Tillos function call / jazz with these things
+    #With the output getting sent in a message looking like the following #HEADS UP JOHN
+    if Card_Action == "Remove":
+        #Tillo Does Remove Here
+        Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}] 
+    if Card_Action == "Add":
+        #Tillo Does Add Here
+        Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}] 
     
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 sockets = Sockets(app)
 app.register_blueprint(html, url_prefix=r'/')
 sockets.register_blueprint(ws, url_prefix=r'/')
 
-
-#RUN THIS VERSION FOR LOCALHOST
+# RUN THIS VERSION FOR LOCALHOST
 # if __name__ == '__main__':
 #     app.run(host='0.0.0.0', port=8000,debug=True)
 
