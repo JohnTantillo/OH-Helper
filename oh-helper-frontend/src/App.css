@@ -12,6 +12,7 @@
 html {
   --left-gradient: #e37a12;
   --right-gradient: #f748c9;
+  --default-tag-color: rgba(247, 72, 201, 0.6);
   --window-background: rgba(0, 0, 0, 0.2);
   --transparent: rgba(0, 0, 0, 0);
   --header-color: #ffffff;

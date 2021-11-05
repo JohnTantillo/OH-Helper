@@ -1,9 +1,15 @@
 import React from "react";
 import DropDownComponent from "./DropDownComponent";
+import PriorityLabel from "./PriorityLabel";
 
 // props
 // name: student name
 // question: students question
+// priority: priority of the question (aka tag to display)
+// acceptFunction: function to call on accept
+// deleteFunction: function to call on delete
+// priorityLevels: Object of priority levels
+
 export default class Ticket extends React.Component {
   constructor(props) {
     super(props);
@@ -14,33 +20,13 @@ export default class Ticket extends React.Component {
           name: "accept",
           text: "Accept",
           active: true,
-          onClick: () => {
-            console.log("test");
-          },
+          onClick: this.props.admin ? this.props.acceptFunction : () => {}
         },
         {
           name: "delete",
           text: "Delete",
           active: true,
-          onClick: () => {
-            console.log("test");
-          },
-        },
-        {
-          name: "moveup",
-          text: "Move Up",
-          active: true,
-          onClick: () => {
-            console.log("test");
-          },
-        },
-        {
-          name: "movedown",
-          text: "Move Down",
-          active: true,
-          onClick: () => {
-            console.log("test");
-          },
+          onClick: this.props.admin ? this.props.deleteFunction : () => {}
         },
       ],
     };
@@ -51,6 +37,9 @@ export default class Ticket extends React.Component {
       <div className="questionWindow">
         <div className="leftContainer">
           <div className="nameHolder">{this.props.name}</div>
+          <div className="tagContainer">
+            <PriorityLabel priority={this.props.priority} priorityObj={this.props.priorityLevels}></PriorityLabel>
+          </div>
           {this.state.teacherOptions ? (
             <DropDownComponent
               active={true}
