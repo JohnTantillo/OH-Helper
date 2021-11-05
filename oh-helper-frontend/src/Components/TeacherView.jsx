@@ -8,12 +8,13 @@ class TeacherView extends React.Component {
     super(props);
     this.state = {
       ticket: [
-        { name: "John Dunaske", question: "Is this a test?" },
-        { name: "John Dunaske", question: "Is this a test?" },
+        { name: "John Dunaske", question: "This is a question", priority: 3 },
       ],
       searchResults: [],
       student: false,
       searchText: "",
+      priorityLevels: { 0: "Homework", 1: "Exam", 2: "Lab", 3: "Lecture" },
+      currentPriority: 0,
     };
   }
 
@@ -23,6 +24,16 @@ class TeacherView extends React.Component {
 
   submitQuestion = () => {
     console.log("Do stuff");
+  };
+
+  acceptTicket = () => {
+    console.log("accepted");
+    //TODO: implement accepting tickets
+  };
+
+  removeTicket = () => {
+    console.log("deleted");
+    //TODO: implement removing tickets
   };
 
   render() {
@@ -38,13 +49,17 @@ class TeacherView extends React.Component {
                   name={ticket.name}
                   question={ticket.question}
                   admin={true}
+                  priority={ticket.priority}
+                  priorityLevels={this.state.priorityLevels}
+                  acceptFunction={this.acceptTicket}
+                  deleteFunction={this.removeTicket}
                 ></Ticket>
               );
             })}
           </div>
         </div>
         <div className="rightMaster">
-          <div className="accountName">{"Welcome, " + this.props.name}</div>
+          <div className="accountNameTeacher">{"Welcome, " + this.props.name}</div>
           <div className="studentSearchHeader">Student Search:</div>
           <input
             className="studentSearchBar"

@@ -25,7 +25,8 @@ export default class TASelectPage extends React.Component {
         }
       })
       .then((data) => {
-        this.setState({ studentOptions: data });
+        var options = data !== "" ? data : [];
+        this.setState({ studentOptions: options});
       });
   };
 

@@ -1,229 +1,243 @@
 .studentViewContainer {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
 }
 
 .studentQueueContainer {
-    width: 60vw;
-    height: 96vh;
-    margin-left: 1vw;
-    margin-top: 1vh;
-    margin-right: 2vw;
+  width: 60vw;
+  height: 96vh;
+  margin-left: 1vw;
+  margin-top: 1vh;
+  margin-right: 2vw;
 }
 
 .student {
-    color: var(--header-color);
-    font-family: var(--general-font);
-    font-style: normal;
-    font-weight: 300;
-    box-shadow: 5px 0px 4px var(--window-shadow),
-      -5px 5px 4px var(--window-shadow);
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
-    background-color: var(--window-background);
-    border-radius: 20px;
-    font-size: 5vmin;
-    align-items: center;
-    text-align: center;
-    width: 60vw;
-    height: 6.8vh;
-    margin-bottom: 1vh;
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-style: normal;
+  font-weight: 300;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  background-color: var(--window-background);
+  border-radius: 20px;
+  font-size: 5vmin;
+  align-items: center;
+  text-align: center;
+  width: 60vw;
+  height: 6.8vh;
+  margin-bottom: 1vh;
 }
 
 .activeTA {
-    color: var(--header-color);
-    font-family: var(--general-font);
-    font-style: normal;
-    font-weight: 300;
-    box-shadow: 5px 0px 4px var(--window-shadow),
-      -5px 5px 4px var(--window-shadow);
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
-    background-color: var(--window-background);
-    border-radius: 20px;
-    font-size: 5vmin;
-    align-items: center;
-    text-align: center;
-    width: 35vw;
-    height: 6.8vh;
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-style: normal;
+  font-weight: 300;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  background-color: var(--window-background);
+  border-radius: 20px;
+  font-size: 5vmin;
+  align-items: center;
+  text-align: center;
+  width: 35vw;
+  height: 6.8vh;
 }
 
 .studentQueueWindow {
-    width: 60vw;
-    height: 88vh;
-    box-shadow: 5px 0px 4px var(--window-shadow),
-      -5px 5px 4px var(--window-shadow);
-    background-color: var(--window-background);
-    border-radius: 20px;
-    font-size: 5vmin;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 60vw;
+  height: 88vh;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  background-color: var(--window-background);
+  border-radius: 20px;
+  font-size: 5vmin;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .activeTAWindow {
-    width: 35vw;
-    height: 50vh;
-    box-shadow: 5px 0px 4px var(--window-shadow),
-      -5px 5px 4px var(--window-shadow);
-    background-color: var(--window-background);
-    border-radius: 20px;
-    margin-top: 1vh;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    align-items: center;
+  width: 35vw;
+  height: 50vh;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  background-color: var(--window-background);
+  border-radius: 20px;
+  margin-top: 1vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
 }
 .rightMasterStudent {
-    width: 35vw;
-    height: 96vh;
-    margin-top: 1vh;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    background-color: rgba(0, 0, 0, 0);
+  width: 35vw;
+  height: 96vh;
+  margin-top: 1vh;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .newQuestionContainer {
-    width: 35vw;
-    height: 34vh;
-    margin-top: 1vh;
-    box-shadow: 5px 0px 4px var(--window-shadow),
-      -5px 5px 4px var(--window-shadow);
-    background-color: var(--window-background);
-    border-radius: 20px;
+  width: 35vw;
+  height: 34vh;
+  margin-top: 1vh;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  background-color: var(--window-background);
+  border-radius: 20px;
 }
 
 .newQuestionHeader {
-    color: var(--header-color);
-    font-family: var(--general-font);
-    font-style: normal;
-    font-weight: 300;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
-    background-color: rgba(90, 212, 239, 0.24);
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    font-size: 3vmin;
-    width: 15vw;
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 5px 0px 4px var(--window-shadow),
-      0px 5px 4px var(--window-shadow);
-    margin-bottom: 0vh;
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-style: normal;
+  font-weight: 300;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  background-color: rgba(90, 212, 239, 0.24);
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  font-size: 3vmin;
+  width: 15vw;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 0px 4px var(--window-shadow), 0px 5px 4px var(--window-shadow);
+  margin-bottom: 0vh;
 }
 
 .newQuestionInput {
-    width: 31vw;
-    height: 19vh;
-    box-shadow: 5px 0px 4px var(--window-shadow),
-      -5px 5px 4px var(--window-shadow);
-    background: rgba(255, 255, 255, 0.88);
-    border-radius: 20px;
-    border: 0;
-    text-align: left;
-    padding-left: 1.2vw;
-    padding-top: 1.2vh;
-    font-family: var(--general-font);
-    font-style: normal;
-    font-weight: 300;
-    font-size: 2.4vmin;
-    resize: none;
+  width: 31vw;
+  height: 19vh;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 20px;
+  border: 0;
+  text-align: left;
+  padding-left: 1.2vw;
+  padding-top: 1.2vh;
+  font-family: var(--general-font);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 2.4vmin;
+  resize: none;
 }
 
 .charCount {
-    font-family: var(--general-font);
-    font-style: normal;
-    font-weight: 300;
-    font-size: 1.5vmin;
-    width: 32vw;
-    text-align: right;
-    margin: 0;
-    color: var(--header-color);
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  font-family: var(--general-font);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.5vmin;
+  width: 32vw;
+  text-align: right;
+  margin: 0;
+  color: var(--header-color);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
 }
 
 .studentButtonContainer {
-    width: 35vw;
-    height: 6vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 35vw;
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .postButton {
-    font-family: var(--general-font);
-    font-style: normal;
-    font-size: 2.5vmin;
-    font-weight: 600;
-    width: 8vw;
-    height: 4vh;
-    background-color: rgba(90, 212, 239, 0.4) !important;
+  font-family: var(--general-font);
+  font-style: normal;
+  font-size: 2.5vmin;
+  font-weight: 600;
+  width: 8vw;
+  height: 4vh;
+  background-color: rgba(90, 212, 239, 0.4) !important;
+}
+
+.priorityDropdown {
+  width: 8vw;
+  height: 4vh;
+  border-radius: 20px;
+  margin-left: 1vw;
+  background-color: rgba(255, 118, 219, 0.69);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  box-shadow: 5px 0px 4px var(--window-shadow), 0px 5px 4px var(--window-shadow);
+  border: 0;
+  color: var(--header-color);
+  font-weight: 600;
+  font-family: var(--general-font);
+  padding-left: 0.5vw;
 }
 
 .welcomeStudent {
-    font-family: var(--general-font);
-    color: var(--header-color);
-    font-style: normal;
-    font-size: 2.5vmin;
-    font-weight: 600;
-    width: 35vw;
-    height: 3vh;
-    margin-bottom: 1vh !important;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  font-family: var(--general-font);
+  color: var(--header-color);
+  font-style: normal;
+  font-size: 2.5vmin;
+  font-weight: 600;
+  width: 35vw;
+  height: 3vh;
+  margin-bottom: 1vh !important;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
 }
 
 .postButton:hover {
-    background-color: rgba(62, 149, 168, 0.4) !important;
+  background-color: rgba(62, 149, 168, 0.4) !important;
 }
 
 .activeTAWindow::-webkit-scrollbar {
-    display: block;
-    width: 1vmin;
+  display: block;
+  width: 1vmin;
 }
 
 .activeTAWindow::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
 .activeTAWindow::-webkit-scrollbar-thumb {
-    background-color: var(--window-background);
-    border-radius: 20px;
+  background-color: var(--window-background);
+  border-radius: 20px;
 }
 
 .activeTAWindow::-webkit-scrollbar-track-piece:end {
-    background: transparent;
-    margin-bottom: 2vmin;
+  background: transparent;
+  margin-bottom: 2vmin;
 }
 
 .activeTAWindow::-webkit-scrollbar-track-piece:start {
-    background: transparent;
-    margin-top: 2vmin;
+  background: transparent;
+  margin-top: 2vmin;
 }
 
 .studentQueueWindow::-webkit-scrollbar {
-    display: block;
-    width: 1vmin;
+  display: block;
+  width: 1vmin;
 }
 
 .studentQueueWindow::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
 .studentQueueWindow::-webkit-scrollbar-thumb {
-    background-color: var(--window-background);
-    border-radius: 20px;
+  background-color: var(--window-background);
+  border-radius: 20px;
 }
 
 .studentQueueWindow::-webkit-scrollbar-track-piece:end {
-    background: transparent;
-    margin-bottom: 2vmin;
+  background: transparent;
+  margin-bottom: 2vmin;
 }
 
 .studentQueueWindow::-webkit-scrollbar-track-piece:start {
-    background: transparent;
-    margin-top: 2vmin;
+  background: transparent;
+  margin-top: 2vmin;
 }
