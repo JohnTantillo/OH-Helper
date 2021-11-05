@@ -1,0 +1,141 @@
+.pageContainer {
+  width: 100vw;
+  height: 100vh;
+}
+
+.passWindowContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.passWindow {
+  width: 35vw;
+  height: 53vh;
+  background-color: var(--window-background);
+  border-radius: 20px;
+  border: var(--window-outline);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+}
+
+.resetLabel {
+    font-family: var(--general-font);
+    font-size: 4vmin;
+    font-weight: 300;
+    color: var(--header-color);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+    margin-bottom: 1.5vh;
+    margin-top: 2.5vh;
+}
+
+.emailLabel {
+    color: var(--header-color);
+    font-family: var(--general-font);
+    font-weight: 300;
+    font-size: 2.5vmin;
+    margin-top: 1vmin;
+    margin-bottom: 1vmin;
+    width: 28vw;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+    height: 3vh;
+    text-align: left;
+}
+
+.emailInput {
+    text-align: left;
+    width: 29vw;
+    font-size: 2.3vmin;
+    font-family: var(--general-font);
+    font-weight: 300;
+    font-style: normal;
+    color: var(--text-color);
+    background-color: var(--header-color);
+    border-radius: 20px;
+    border: 0px;
+    box-shadow: 5px 0px 4px var(--window-shadow),
+      -5px 5px 4px var(--window-shadow);
+    padding-left: 2vmin;
+    padding-top: 1vmin;
+    padding-bottom: 1vmin;
+    margin-top: 0.1vmin;
+}
+
+.confirmPasswordInput {
+    text-align: left;
+    width: 29vw;
+    font-size: 2.3vmin;
+    font-family: var(--general-font);
+    font-weight: 300;
+    font-style: normal;
+    color: var(--text-color);
+    background-color: var(--header-color);
+    border-radius: 20px;
+    border: 0px;
+    box-shadow: 5px 0px 4px var(--window-shadow),
+      -5px 5px 4px var(--window-shadow);
+    padding-left: 2vmin;
+    padding-top: 1vmin;
+    padding-bottom: 1vmin;
+    margin-top: 0.1vmin;
+}
+
+.passwordInput {
+    text-align: left;
+    width: 29vw;
+    font-size: 2.3vmin;
+    font-family: var(--general-font);
+    font-weight: 300;
+    font-style: normal;
+    color: var(--text-color);
+    background-color: var(--header-color);
+    border-radius: 20px;
+    border: 0px;
+    box-shadow: 5px 0px 4px var(--window-shadow),
+      -5px 5px 4px var(--window-shadow);
+    padding-left: 2vmin;
+    padding-top: 1vmin;
+    padding-bottom: 1vmin;
+    margin-top: 0.1vmin;
+}
+
+.passwordLabel {
+    color: var(--header-color);
+    font-family: var(--general-font);
+    font-weight: 300;
+    font-size: 2.5vmin;
+    margin-top: 1vmin;
+    margin-bottom: 1vmin;
+    width: 28vw;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+    height: 3vh;
+    text-align: left;
+}
+
+.confirmPasswordLabel {
+    color: var(--header-color);
+    font-family: var(--general-font);
+    font-weight: 300;
+    font-size: 2.5vmin;
+    margin-top: 1vmin;
+    margin-bottom: 1vmin;
+    width: 28vw;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+    height: 3vh;
+    text-align: left;
+}
+
+.resetButton {
+    background-color: rgba(255, 118, 219, 0.69) !important;
+    width: 10vw;
+    height: 5vh;
+    font-family: var(--general-font);
+    font-size: 3vmin;
+    margin-top: 3vh !important;
+}

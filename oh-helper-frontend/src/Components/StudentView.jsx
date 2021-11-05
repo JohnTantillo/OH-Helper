@@ -7,7 +7,7 @@ class StudentView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticket: [{ name: "John Dunaske", question: "Is this a test?" }, { name: "John Dunaske", question: "Is this a test?" }],
+      ticket: [],
       activeTAs: [],
       student: true,
       question: "",
@@ -21,7 +21,7 @@ class StudentView extends React.Component {
   };
 
   submitQuestion = () => {
-      console.log("Do stuff");
+      
   }
 
   render() {
@@ -36,7 +36,7 @@ class StudentView extends React.Component {
           </div>
         </div>
         <div className="rightMasterStudent">
-          <div className="accountName">{"Welcome, " + this.props.name}</div>
+          <div className="welcomeStudent">{"Welcome, " + this.props.name}</div>
           <div className="activeTA headerText">Active TA's</div>
           <div className="activeTAWindow">
             {this.state.activeTAs.map((ta) => {
@@ -58,7 +58,7 @@ class StudentView extends React.Component {
               minLength={this.state.questionMinLength}
               onChange={this.questionOnChanged}
             ></textarea>
-            <div className="buttonContainer">
+            <div className="studentButtonContainer">
                 <Button active={true} text="Post" buttonType="postButton" onclick={this.submitQuestion}></Button>
             </div>
           </div>
