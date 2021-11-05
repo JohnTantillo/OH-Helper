@@ -10,8 +10,8 @@ from database import MongoBase
 from flask_sockets import Sockets
 import sys
 import json
-import Ticket
-import PriorityQueue
+from TicketQueue import Ticket
+from TicketQueue import PriorityQueue
 
 
 html = Blueprint(r'html', __name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
@@ -39,17 +39,10 @@ def loginHandle():
         return json.dumps({'Successful': False, 'AccType': accType, 'Username': "NONE", 'Ubit': "NONE"}) #[i["Name"], i["Ubit"], i["accType"]]
 
 
-<<<<<<< HEAD
-@html.route('/passwordReset', methods=(["post"])) 
-def passwordResetHandle():
-    MongoBase.password_reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
-    return json.dumps({'success': True})                                                                   #Also return a bool for your function here
-=======
 @html.route('/password_reset', methods=(["post"])) 
 def Password_Reset_Handle():
-    # MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
-    return True                                                                   #Also return a bool for your function here
->>>>>>> develop
+    MongoBase.password_reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
+    return True   
 
 @html.route('/getStudents', methods=(["post"])) 
 def studentGetter():
@@ -65,15 +58,6 @@ def studentGetter():
 #     #Tillos function call / jazz with these things
 #     Cards.append({"Name": "Test", "Question": "Test Question", "Label": Card_Label}) #This is a sample appending
 
-@html.route('/role', methods=(["post"]))
-def Role_handle():
-    MongoBase.Role_Update(request.json["email"], request.json["role"])
-    return True
-
-@html.route('/register', methods=(["post"]))
-def password_handle():
-    MongoBase.password_update(request.json["email"], request.json["password"])
-    return True
 
 
 @html.route('/role', methods=(["post"])) #32
@@ -137,8 +121,7 @@ sockets = Sockets(app)
 app.register_blueprint(html, url_prefix=r'/')
 sockets.register_blueprint(ws, url_prefix=r'/')
 
-
-#RUN THIS VERSION FOR LOCALHOST
+# RUN THIS VERSION FOR LOCALHOST
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000,debug=True)
 
