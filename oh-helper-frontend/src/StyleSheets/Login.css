@@ -98,6 +98,14 @@
   margin-top: 0.1vmin;
 }
 
+.forgotPasswordLink {
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-weight: 300;
+  font-size: 2vmin;
+  margin-top: 1vh;
+}
+
 .loginButton {
   background-color: rgba(255, 118, 219, 0.69) !important;
   font-size: 4vmin;

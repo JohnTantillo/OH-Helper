@@ -20,7 +20,7 @@ export default class StudentOption extends React.Component {
       body: JSON.stringify({email: this.props.email, role: newRole})
     })
     .then((response) => {
-      if (response.status == 404) {
+      if (response.ok === false) {
         alert("Error: Could not reach server.")
       } else {
         this.setState({ selected: roleBool });

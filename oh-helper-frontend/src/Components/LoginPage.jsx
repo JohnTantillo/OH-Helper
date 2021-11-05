@@ -25,26 +25,26 @@ class LoginPage extends React.Component {
     //   });
     // });
 
-    fetch("/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, password: pass, salt:""}),
-    })
-      .then((response) => response != "" ? response.json() : "")
-      .then((success) => {
-        if (success !== "") {
-          if (success.AccType === "teacher") {
-            this.props.loginFlag(true, false, success.Username);
-          } else if (success.AccType === "student") {
-            this.props.loginFlag(true, true, success.Username);
-          } else if (success.AccType === "instructor") {
-            this.props.loginFlag(true, false, success.Username);
-          }
-        } else {
-          this.props.loginFlag(false, false, "");
-        }
-      });
-    //this.props.loginFlag(true, false, "Jesse Hartloff");
+    // fetch("/login", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ email: email, password: pass, salt:""}),
+    // })
+    //   .then((response) => response !== "" ? response.json() : "")
+    //   .then((success) => {
+    //     if (success !== "") {
+    //       if (success.AccType === "teacher") {
+    //         this.props.loginFlag(true, false, success.Username);
+    //       } else if (success.AccType === "student") {
+    //         this.props.loginFlag(true, true, success.Username);
+    //       } else if (success.AccType === "instructor") {
+    //         this.props.loginFlag(true, false, success.Username);
+    //       }
+    //     } else {
+    //       this.props.loginFlag(false, false, "");
+    //     }
+    //   });
+    this.props.loginFlag(true, true, "Jesse Hartloff");
     return true;
   };
 
@@ -82,6 +82,7 @@ class LoginPage extends React.Component {
               placeholder="Password..."
               onChange={this.passwordOnChange}
             />
+            <a className="forgotPasswordLink" href="/forgotPassword">Forgot Password?</a>
             <Button
               active={true}
               onclick={this.login}
