@@ -41,7 +41,7 @@ def loginHandle():
 
 @html.route('/password_reset', methods=(["post"]))
 def Password_Reset_Handle():
-    # MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
+    MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
     return True                                                                   #Also return a bool for your function here
 
 @html.route('/getStudents', methods=(["post"]))
