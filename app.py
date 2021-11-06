@@ -78,13 +78,17 @@ socket_to_email = {}
 Cards_Backlog = []
 
 
+@ws.route('/connected')
+def socket_connected(socket):
+    print("Socket connected!", flush=True)
+
 @ws.route('/websocket')
 def socket_helper(socket):             
     global Cards_Backlog
     list_of_sockets.append(socket)                      
     for ind_sockets in list_of_sockets:                 
         if not ind_sockets.closed:
-            ind_sockets.send(json.dumps({"Cards": Cards_Backlog})) #Send out current collection of cards # This may need to be changed to student_queue
+            ind_sockets.send(json.dumps(student_queue.get_all_info())) #Send out current collection of cards # This may need to be changed to student_queue
     while not socket.closed:                            # While this socket is not closed do the following
         message = socket.receive()
         if message is not None:
@@ -93,7 +97,7 @@ def socket_helper(socket):
                 if not sock.closed: 
                     sock.send(json.dumps(student_queue.get_all_info()))
                     # sock.send(json.dumps({Cards_Backlog})) #tells all sockets to put this in.
-        list_of_sockets.remove(socket)
+    list_of_sockets.remove(socket)
 
 
 #breaks down socket message and directs accordingly
@@ -123,7 +127,10 @@ sockets.register_blueprint(ws, url_prefix=r'/')
 
 # RUN THIS VERSION FOR LOCALHOST
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000,debug=True)
+    from gevent import pywsgi
+    from geventwebsocket.handler import WebSocketHandler
+    server = pywsgi.WSGIServer(('', 8000), app, handler_class=WebSocketHandler)
+    server.serve_forever()
 
 #Run THIS VERSION FOR HEROKU
 

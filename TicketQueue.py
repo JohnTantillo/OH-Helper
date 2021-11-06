@@ -27,7 +27,8 @@ class PriorityQueue:
             self.q.append(Queue())
 
     def insert(self, tic):
-        priority = tic.get_prios()
+        priority = int(tic.get_prios())
+        print(priority)
         ticket_queue = self.q[priority]
         ticket_queue.put(tic)
 

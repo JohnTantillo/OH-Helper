@@ -2,17 +2,14 @@ import React from "react";
 import Button from "./Button.jsx";
 import TATile from "./TATile.jsx";
 import Ticket from "./Ticket.jsx";
-//import {w3cwebsocket as W3CWebSocket} from "websocket";
 
-//const client = new W3CWebSocket('ws://127.0.0.1:8000')
+var socket;
 
 class StudentView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticket: [
-        { name: "John Dunaske", question: "This is a question", priority: 0 },
-      ],
+      ticket: [],
       activeTAs: [],
       student: true,
       question: "",
@@ -23,13 +20,22 @@ class StudentView extends React.Component {
     };
   }
 
-  componentDidMount = () => {
-    // client.onopen = () => {
-    //   console.log('WebSocket client connection');
-    // };
-    // client.onmessage = (message) => {
-    //   console.log(message);
-    // }
+  componentDidMount() {
+    socket = new WebSocket("ws://localhost:8000/websocket");
+
+    socket.addEventListener("open", (event) => {
+      console.log("Websocket Connected!");
+    });
+
+    socket.addEventListener("message", (event) => {
+      var data = JSON.parse(event.data);
+      console.log(data);
+      this.setState({ ticket: data["Queue"] });
+    });
+
+    socket.addEventListener("close", (event) => {
+      console.log("Websocket Disconnected!");
+    });
 
     fetch("/getStudents", {
       method: "POST",
@@ -57,7 +63,7 @@ class StudentView extends React.Component {
 
         this.setState({ activeTAs: taList });
       });
-  };
+  }
 
   questionOnChanged = (event) => {
     this.setState({ question: event.target.value });
@@ -80,6 +86,7 @@ class StudentView extends React.Component {
       Label: this.state.currentPriority,
       Action: "Add",
     };
+    socket.send(JSON.stringify(ticketData));
   };
 
   render() {
@@ -91,10 +98,10 @@ class StudentView extends React.Component {
             {this.state.ticket.map((ticket) => {
               return (
                 <Ticket
-                  name={ticket.name}
-                  question={ticket.question}
+                  name={ticket.Name}
+                  question={ticket.Message}
                   admin={false}
-                  priority={ticket.priority}
+                  priority={ticket.Priority}
                   priorityLevels={this.state.priorityLevels}
                 ></Ticket>
               );
