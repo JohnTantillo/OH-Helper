@@ -18,18 +18,21 @@ html {
   --header-color: #ffffff;
   --button-text-color: #ffffff;
   --general-font: "Mulish";
-  --text-color: rgba(0,0,0,1);
-  --window-outline: 1px solid rgba(0,0,0,0);
-  --line-break-outline: 0.5px solid rgba(0,0,0,0.2);
-  --button-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25), -5px 5px 4px rgba(0, 0, 0, 0.25);
-  --text-outline-color: rgba(0,0,0,0.2);
-  --window-shadow: rgba(0,0,0,0.25);
+  --text-color: rgba(0, 0, 0, 1);
+  --window-outline: 1px solid rgba(0, 0, 0, 0);
+  --line-break-outline: 0.5px solid rgba(0, 0, 0, 0.2);
+  --button-shadow: 5px 0px 4px rgba(0, 0, 0, 0.25),
+    -5px 5px 4px rgba(0, 0, 0, 0.25);
+  --text-outline-color: rgba(0, 0, 0, 0.2);
+  --window-shadow: rgba(0, 0, 0, 0.25);
   --inactive-button-color: rgba(130, 130, 130, 0.69);
   --inactive-button-hover: rgba(94, 94, 94, 0.69);
   --default-button-color: rgba(255, 220, 97, 0.69);
   --default-button-hover: rgba(168, 145, 62, 0.69);
   --gradient-angle: 107deg;
-  --text-outline: -1px 0px 0 var(--text-outline-color), 1px 0px 0 var(--text-outline-color), 0px -1px 0 var(--text-outline-color), 0px 1px 0 var(--text-outline-color);
+  --text-outline: -1px 0px 0 var(--text-outline-color),
+    1px 0px 0 var(--text-outline-color), 0px -1px 0 var(--text-outline-color),
+    0px 1px 0 var(--text-outline-color);
 }
 
 .App {

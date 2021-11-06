@@ -3,13 +3,13 @@ import Button from "./Button.jsx";
 import Ticket from "./Ticket.jsx";
 import RouteButton from "./RouteButton";
 
+var socket;
+
 class TeacherView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ticket: [
-        { name: "John Dunaske", question: "This is a question", priority: 3 },
-      ],
+      ticket: [],
       searchResults: [],
       student: false,
       searchText: "",
@@ -18,22 +18,47 @@ class TeacherView extends React.Component {
     };
   }
 
+  componentDidMount() {
+    socket = new WebSocket("ws://localhost:8000/websocket");
+
+    socket.addEventListener("open", (event) => {
+      console.log("Websocket Connected!");
+    });
+
+    socket.addEventListener("message", (event) => {
+      var data = JSON.parse(event.data);
+      this.setState({ ticket: data["Queue"] });
+    });
+
+    socket.addEventListener("close", (event) => {
+      console.log("Websocket Disconnected!");
+    });
+  }
+
   searchOnChanged = (event) => {
     this.setState({ searchText: event.target.value });
   };
 
-  submitQuestion = () => {
-    console.log("Do stuff");
+  acceptTicket = (question) => {
+    var ticketData = {
+      Name: "",
+      Issue: "",
+      Label: "",
+      Question: question,
+      Action: "Remove",
+    };
+    socket.send(JSON.stringify(ticketData));
   };
 
-  acceptTicket = () => {
-    console.log("accepted");
-    //TODO: implement accepting tickets
-  };
-
-  removeTicket = () => {
-    console.log("deleted");
-    //TODO: implement removing tickets
+  removeTicket = (question) => {
+    var ticketData = {
+      Name: "",
+      Issue: "",
+      Label: "",
+      Question: question,
+      Action: "Remove",
+    };
+    socket.send(JSON.stringify(ticketData));
   };
 
   render() {
@@ -45,11 +70,10 @@ class TeacherView extends React.Component {
             {this.state.ticket.map((ticket) => {
               return (
                 <Ticket
-                  key={ticket.name}
-                  name={ticket.name}
-                  question={ticket.question}
+                  name={ticket.Name}
+                  question={ticket.Message}
                   admin={true}
-                  priority={ticket.priority}
+                  priority={ticket.Priority}
                   priorityLevels={this.state.priorityLevels}
                   acceptFunction={this.acceptTicket}
                   deleteFunction={this.removeTicket}
@@ -59,7 +83,9 @@ class TeacherView extends React.Component {
           </div>
         </div>
         <div className="rightMaster">
-          <div className="accountNameTeacher">{"Welcome, " + this.props.name}</div>
+          <div className="accountNameTeacher">
+            {"Welcome, " + this.props.name}
+          </div>
           <div className="studentSearchHeader">Student Search:</div>
           <input
             className="studentSearchBar"

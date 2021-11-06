@@ -20,13 +20,13 @@ export default class Ticket extends React.Component {
           name: "accept",
           text: "Accept",
           active: true,
-          onClick: this.props.admin ? this.props.acceptFunction : () => {}
+          onClick: this.props.admin ? () => {this.props.acceptFunction(this.props.question)} : () => {}
         },
         {
           name: "delete",
           text: "Delete",
           active: true,
-          onClick: this.props.admin ? this.props.deleteFunction : () => {}
+          onClick: this.props.admin ? () => {this.props.deleteFunction(this.props.question)} : () => {}
         },
       ],
     };

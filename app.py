@@ -39,12 +39,12 @@ def loginHandle():
         return json.dumps({'Successful': False, 'AccType': accType, 'Username': "NONE", 'Ubit': "NONE"}) #[i["Name"], i["Ubit"], i["accType"]]
 
 
-@html.route('/password_reset', methods=(["post"])) 
+@html.route('/password_reset', methods=(["post"]))
 def Password_Reset_Handle():
     # MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
     return True                                                                   #Also return a bool for your function here
 
-@html.route('/getStudents', methods=(["post"])) 
+@html.route('/getStudents', methods=(["post"]))
 def studentGetter():
     Students = MongoBase.studentFind()
     return json.dumps(Students) #Format is "{'online_students': [studentObject]}"
@@ -78,22 +78,26 @@ socket_to_email = {}
 Cards_Backlog = []
 
 
+@ws.route('/connected')
+def socket_connected(socket):
+    print("Socket connected!", flush=True)
+
 @ws.route('/websocket')
-def socket_helper(socket):             
+def socket_helper(socket):
     global Cards_Backlog
-    list_of_sockets.append(socket)                      
-    for ind_sockets in list_of_sockets:                 
+    list_of_sockets.append(socket)
+    for ind_sockets in list_of_sockets:
         if not ind_sockets.closed:
-            ind_sockets.send(json.dumps({"Cards": Cards_Backlog})) #Send out current collection of cards # This may need to be changed to student_queue
+            ind_sockets.send(json.dumps(student_queue.get_all_info())) #Send out current collection of cards # This may need to be changed to student_queue
     while not socket.closed:                            # While this socket is not closed do the following
         message = socket.receive()
         if message is not None:
             Message_Breakdown(message)
             for sock in list_of_sockets:
-                if not sock.closed: 
+                if not sock.closed:
                     sock.send(json.dumps(student_queue.get_all_info()))
                     # sock.send(json.dumps({Cards_Backlog})) #tells all sockets to put this in.
-        list_of_sockets.remove(socket)
+    list_of_sockets.remove(socket)
 
 
 #breaks down socket message and directs accordingly
@@ -109,13 +113,13 @@ def Message_Breakdown(message):
     if Card_Action == "Remove":
         #Tillo Does Remove Here
         student_queue.admit_next()
-        # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}] 
+        # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}]
     if Card_Action == "Add":
         #Tillo Does Add Here
         tic = Ticket(Card_Label, Card_Person_Name, Card_Issue)
         student_queue.insert(tic)
-        # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}] 
-    
+        # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}]
+
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 sockets = Sockets(app)
 app.register_blueprint(html, url_prefix=r'/')
@@ -123,7 +127,10 @@ sockets.register_blueprint(ws, url_prefix=r'/')
 
 # RUN THIS VERSION FOR LOCALHOST
 # if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=8000,debug=True)
+#     from gevent import pywsgi
+#     from geventwebsocket.handler import WebSocketHandler
+#     server = pywsgi.WSGIServer(('', 8000), app, handler_class=WebSocketHandler)
+#     server.serve_forever()
 
 #Run THIS VERSION FOR HEROKU
 
@@ -133,4 +140,3 @@ if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
     server = pywsgi.WSGIServer(('', port), app, handler_class=WebSocketHandler)
     server.serve_forever()
-    
