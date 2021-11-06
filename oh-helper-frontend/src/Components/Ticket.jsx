@@ -15,20 +15,6 @@ export default class Ticket extends React.Component {
     super(props);
     this.state = {
       teacherOptions: this.props.admin ? true : false,
-      optionsList: [
-        {
-          name: "accept",
-          text: "Accept",
-          active: true,
-          onClick: this.props.admin ? () => {this.props.acceptFunction(this.props.question)} : () => {}
-        },
-        {
-          name: "delete",
-          text: "Delete",
-          active: true,
-          onClick: this.props.admin ? () => {this.props.deleteFunction(this.props.question)} : () => {}
-        },
-      ],
     };
   }
 
@@ -40,16 +26,6 @@ export default class Ticket extends React.Component {
           <div className="tagContainer">
             <PriorityLabel priority={this.props.priority} priorityObj={this.props.priorityLevels}></PriorityLabel>
           </div>
-          {this.state.teacherOptions ? (
-            <DropDownComponent
-              active={true}
-              name="teacherOptions"
-              options={this.state.optionsList}
-              text="Options"
-            />
-          ) : (
-            <div className="styleTest"></div>
-          )}
         </div>
         <div className="questionHolder">{this.props.question}</div>
       </div>
