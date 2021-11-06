@@ -39,23 +39,11 @@ class TeacherView extends React.Component {
     this.setState({ searchText: event.target.value });
   };
 
-  acceptTicket = (question) => {
+  acceptTicket = () => {
     var ticketData = {
       Name: "",
       Issue: "",
       Label: "",
-      Question: question,
-      Action: "Remove",
-    };
-    socket.send(JSON.stringify(ticketData));
-  };
-
-  removeTicket = (question) => {
-    var ticketData = {
-      Name: "",
-      Issue: "",
-      Label: "",
-      Question: question,
       Action: "Remove",
     };
     socket.send(JSON.stringify(ticketData));
@@ -67,19 +55,22 @@ class TeacherView extends React.Component {
         <div className="teacherQueueContainer">
           <div className="teacher headerText">Student Queue</div>
           <div className="teacherQueueWindow">
-            {this.state.ticket.map((ticket) => {
-              return (
-                <Ticket
-                  name={ticket.Name}
-                  question={ticket.Message}
-                  admin={true}
-                  priority={ticket.Priority}
-                  priorityLevels={this.state.priorityLevels}
-                  acceptFunction={this.acceptTicket}
-                  deleteFunction={this.removeTicket}
-                ></Ticket>
-              );
-            })}
+            <div className="ticketStorage">
+              {this.state.ticket.map((ticket) => {
+                return (
+                  <Ticket
+                    name={ticket.Name}
+                    question={ticket.Message}
+                    priority={ticket.Priority}
+                    priorityLevels={this.state.priorityLevels}
+                    acceptFunction={this.acceptTicket}
+                  />
+                );
+              })}
+            </div>
+            <div className="acceptButtonContainer">
+              <Button active={true} text="Accept Next" onclick={this.acceptTicket} buttonType="acceptButton"/>
+            </div>
           </div>
         </div>
         <div className="rightMaster">

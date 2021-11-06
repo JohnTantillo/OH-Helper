@@ -100,7 +100,6 @@ class StudentView extends React.Component {
                 <Ticket
                   name={ticket.Name}
                   question={ticket.Message}
-                  admin={false}
                   priority={ticket.Priority}
                   priorityLevels={this.state.priorityLevels}
                 ></Ticket>
