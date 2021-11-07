@@ -94,10 +94,7 @@ def studentFind():
             Names.append({'name':i["Name"], 'accType':acc, 'email':i["Email"]})
     return Names
 
-# Updates user password when "Forgot Password" pressed
-def Password_Reset(email, new_password):
-    User_Pointer.update_one({"Email": email}, {"$set": {"Password": new_password}})
-    return True
+
 
 #registers a user
 def register(Email, Password, Classification, Name, Ubit):
