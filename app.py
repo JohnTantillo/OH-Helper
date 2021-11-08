@@ -42,7 +42,7 @@ def loginHandle():
 @html.route('/password_reset', methods=(["post"]))
 def Password_Reset_Handle():
     MongoBase.Password_Reset(request.json["email"], request.json["new_password"]) #Neel Plug your function name in here
-    return True                                                                   #Also return a bool for your function here
+    return json.dumps({"success":True})                                                                   #Also return a bool for your function here
 
 @html.route('/getStudents', methods=(["post"]))
 def studentGetter():
@@ -126,17 +126,17 @@ app.register_blueprint(html, url_prefix=r'/')
 sockets.register_blueprint(ws, url_prefix=r'/')
 
 # RUN THIS VERSION FOR LOCALHOST
-# if __name__ == '__main__':
-#     from gevent import pywsgi
-#     from geventwebsocket.handler import WebSocketHandler
-#     server = pywsgi.WSGIServer(('', 8000), app, handler_class=WebSocketHandler)
-#     server.serve_forever()
+if __name__ == '__main__':
+    from gevent import pywsgi
+    from geventwebsocket.handler import WebSocketHandler
+    server = pywsgi.WSGIServer(('', 8000), app, handler_class=WebSocketHandler)
+    server.serve_forever()
 
 #Run THIS VERSION FOR HEROKU
 
-if __name__ == "__main__":
-    from gevent import pywsgi
-    from geventwebsocket.handler import WebSocketHandler
-    port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
-    server = pywsgi.WSGIServer(('', port), app, handler_class=WebSocketHandler)
-    server.serve_forever()
+# if __name__ == "__main__":
+#     from gevent import pywsgi
+#     from geventwebsocket.handler import WebSocketHandler
+#     port = int(sys.argv[1]) if len(sys.argv) > 1 else 5000
+#     server = pywsgi.WSGIServer(('', port), app, handler_class=WebSocketHandler)
+#     server.serve_forever()

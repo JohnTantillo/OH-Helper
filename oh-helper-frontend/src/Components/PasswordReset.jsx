@@ -26,12 +26,17 @@ export default class PasswordReset extends React.Component {
     }
 
     handleUpdatePass = () => {
-        fetch("/password_reset")
+        var dataToSend = {email: this.state.email, new_password: this.state.newPass};
+        fetch("/password_reset",{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dataToSend)
+         })
         .then((response) => {
             if (response.ok === false) {
                 alert("Error connecting to server.");
-            } else {
-                console.log(response);
             }
         })
         return true;
