@@ -68,7 +68,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 8vh;
+  margin-top: 4.4vh;
   padding: 0;
   overflow: visible;
 }
@@ -76,7 +76,7 @@
 .dropComponent {
   width: 13vw;
   height: 10vh;
-  margin-top: 0.5vh;;
+  margin-top: 0.5vh;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -90,7 +90,7 @@
   border-radius: 20px;
   padding: 0;
   width: 13vw;
-  height: 18vh;
+  height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,7 +104,7 @@
   font-weight: 300;
   font-size: 2.7vmin;
   width: 13vw;
-  height: 20vh;
+  height: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -131,12 +131,12 @@
 }
 
 .accept {
-  color: #0AD98E;
+  color: #0ad98e;
   z-index: 100;
 }
 
 .delete {
-  color: #FA3838;
+  color: #fa3838;
   z-index: 100;
 }
 
@@ -146,8 +146,43 @@
   box-shadow: 5px 0px 4px var(--window-shadow),
     -5px 5px 4px var(--window-shadow);
   width: 12vw;
-  margin-top: 0.5vh;
+  margin-top: 1vh;
+  margin-bottom: 0vh;
   height: 0.01vh;
-  z-index: 100;
   user-select: none;
+}
+
+.tag {
+  width: 5.5vw;
+  height: 2.5vh;
+  color: var(--header-color);
+  font-family: var(--general-font);
+  font-weight: 600;
+  font-size: 1.8vmin;
+  background-color: var(--default-tag-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  box-shadow: 5px 0px 4px var(--window-shadow),
+    -5px 5px 4px var(--window-shadow);
+  margin-top: 1vh;
+  margin-left: 0.5vw;
+}
+
+.homework {
+  background-color: rgba(250, 75, 90, 0.69);
+}
+
+.exam {
+  background-color: rgba(75, 242, 109, 0.69);
+}
+
+.lab {
+  background-color: rgba(217, 75, 242, 0.69);
+}
+
+.lecture {
+  background-color: rgba(74, 118, 240, 0.69);
 }

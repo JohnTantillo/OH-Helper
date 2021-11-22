@@ -40,10 +40,20 @@
   background-color: var(--window-background);
   border-radius: 20px;
   font-size: 5vmin;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.acceptButton {
+  width: 15vw;
+  height: 6vh;
+  font-size: 3vmin;
+  background-color: rgba(60, 214, 137, 0.69) !important;
+}
+
+.acceptButton:hover {
+  background-color: rgba(46, 171, 108, 0.69) !important;
 }
 
 .rightMaster {
@@ -94,7 +104,8 @@
   margin-bottom: 1vh;
 }
 
-.accountName {
+.accountNameTeacher {
+  color: var(--header-color);
   margin: 0;
   font-family: var(--general-font);
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
@@ -102,6 +113,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.ticketStorage {
+  width: 60vw;
+  height: 80vh;
+  overflow-y: scroll;
 }
 
 .search {
@@ -130,26 +147,26 @@
   height: 76.5vh;
 }
 
-.teacherQueueWindow::-webkit-scrollbar {
+.ticketStorage::-webkit-scrollbar {
   display: block;
   width: 1vmin;
 }
 
-.teacherQueueWindow::-webkit-scrollbar-track {
+.ticketStorage::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.teacherQueueWindow::-webkit-scrollbar-thumb {
+.ticketStorage::-webkit-scrollbar-thumb {
   background-color: var(--window-background);
   border-radius: 20px;
 }
 
-.teacherQueueWindow::-webkit-scrollbar-track-piece:end {
+.ticketStorage::-webkit-scrollbar-track-piece:end {
   background: transparent;
   margin-bottom: 2vmin;
 }
 
-.teacherQueueWindow::-webkit-scrollbar-track-piece:start {
+.ticketStorage::-webkit-scrollbar-track-piece:start {
   background: transparent;
   margin-top: 2vmin;
 }

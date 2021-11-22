@@ -2,6 +2,7 @@ import React from "react";
 import Button from "./Button.jsx";
 import RouteButton from "./RouteButton.jsx";
 import bcrypt from "bcryptjs";
+import { Route } from "react-router";
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class LoginPage extends React.Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email, password: pass, salt:""}),
     })
-      .then((response) => response != "" ? response.json() : "")
+      .then((response) => response !== "" ? response.json() : "")
       .then((success) => {
         if (success !== "") {
           if (success.AccType === "teacher") {
@@ -82,6 +83,7 @@ class LoginPage extends React.Component {
               placeholder="Password..."
               onChange={this.passwordOnChange}
             />
+            <RouteButton active={true} route="/forgotPassword" onclick={()=>{return true;}} text="Forgot Password?" buttonType="forgotPasswordLink"/>
             <Button
               active={true}
               onclick={this.login}

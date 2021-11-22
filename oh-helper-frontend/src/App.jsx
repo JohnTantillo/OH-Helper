@@ -6,6 +6,7 @@ import StudentView from "./Components/StudentView";
 import CreateAccountPage from "./Components/CreateAccountPage";
 import TASelectPage from "./Components/TASelectPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import PasswordReset from "./Components/PasswordReset";
 
 class App extends React.Component {
   constructor(props) {
@@ -32,6 +33,9 @@ class App extends React.Component {
               </Route>
               <Route path="/taSelector">
                 <TASelectPage />
+              </Route>
+              <Route path="/forgotPassword">
+                <PasswordReset />
               </Route>
               <Route path="/">
                 {this.state.loggedIn ? (

@@ -103,6 +103,11 @@ def register(Email, Password, Classification, Name, Ubit):
     User_Pointer.insert_one({"Email": Email, "Password": Password, "Online": False, "accType": Classification, "Name": Name, "Ubit": Ubit}) #Logs user in with online status of False by default (not logged in)
     return True
 
+# Updates user password when "Forgot Password" pressed
+def Password_Reset(email, new_password):
+    User_Pointer.update_one({"Email": email}, {"$set": {"Password": new_password}})
+    return True
+
 #Logs Out an Account based off email
 #TODO
 #1 Ask team if any if there is any information they would like changed on logout

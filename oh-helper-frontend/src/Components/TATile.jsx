@@ -17,11 +17,11 @@ export default class TATile extends React.Component {
         <div className="rightSide">
           <div className="taName">{this.props.name}</div>
           <div className="lineBreak"></div>
-          <div className="taSpecialties">Specialties:</div>
-          <div className="taSpecialtiesList">{this.props.special.join(", ")}</div>
         </div>
       </div>
     );
+    //<div className="taSpecialties">Specialties:</div>
+    //<div className="taSpecialtiesList">{this.props.special.join(", ")}</div>
   }
 }
 
