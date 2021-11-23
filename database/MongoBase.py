@@ -134,12 +134,18 @@ def log_in(Email, Password):
     return [True, accType_Lookup(Email)]
 
 
-def cleansing(htmlstring):
-        escapes = {'\"': '&quot;',
-               '\'': '&#39;',
-               '<': '&lt;',
-               '>': '&gt;'}
-        htmlstring = htmlstring.replace('&', '&amp;')
-        for seq, esc in escapes.items():
-            htmlstring = htmlstring.replace(seq, esc)
-        return htmlstring
+def cleansing(inputs):
+    sanitized = []
+    for i in inputs:
+        print(i)
+        indsanitized = ""
+        disable = False
+        for ind in i:
+            if ind == '<':
+                disable = True
+            elif ind == '>':
+                disable = False
+            elif disable == False:
+                indsanitized = indsanitized + ind
+        sanitized.append(indsanitized)
+    return sanitized
