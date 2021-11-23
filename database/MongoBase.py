@@ -98,7 +98,7 @@ def studentFind():
 
 #registers a user
 def register(Email, Password, Classification, Name, Ubit):
-    Name = cleansing(Name)
+    Name = cleansing([Name])[0]
     if not checkEmailUniqueness(Email):
         return False
     User_Pointer.insert_one({"Email": Email, "Password": Password, "Online": False, "accType": Classification, "Name": Name, "Ubit": Ubit}) #Logs user in with online status of False by default (not logged in)

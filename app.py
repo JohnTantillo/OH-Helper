@@ -6,7 +6,6 @@ Technology: Contains both flask socketed and non-socketed connections
 """
 
 from flask import Flask, make_response, Blueprint, send_file, send_from_directory, request, redirect
-from pymongo import database
 from database import MongoBase
 from flask_sockets import Sockets
 import sys
