@@ -98,6 +98,7 @@ def studentFind():
 
 #registers a user
 def register(Email, Password, Classification, Name, Ubit):
+    Name = cleansing(Name)
     if not checkEmailUniqueness(Email):
         return False
     User_Pointer.insert_one({"Email": Email, "Password": Password, "Online": False, "accType": Classification, "Name": Name, "Ubit": Ubit}) #Logs user in with online status of False by default (not logged in)
@@ -131,3 +132,20 @@ def log_in(Email, Password):
     User_Pointer.update_one({"Email" : Email}, {"$set": {"Online": "True"}}) #Sets user to online
     print([True, accType_Lookup(Email)])
     return [True, accType_Lookup(Email)]
+
+
+def cleansing(inputs):
+    sanitized = []
+    for i in inputs:
+        print(i)
+        indsanitized = ""
+        disable = False
+        for ind in i:
+            if ind == '<':
+                disable = True
+            elif ind == '>':
+                disable = False
+            elif disable == False:
+                indsanitized = indsanitized + ind
+        sanitized.append(indsanitized)
+    return sanitized

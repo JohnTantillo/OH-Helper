@@ -6,6 +6,7 @@ Technology: Contains both flask socketed and non-socketed connections
 """
 
 from flask import Flask, make_response, Blueprint, send_file, send_from_directory, request, redirect
+from pymongo import database
 from database import MongoBase
 from flask_sockets import Sockets
 import sys
@@ -92,10 +93,12 @@ def socket_helper(socket):
     while not socket.closed:                            # While this socket is not closed do the following
         message = socket.receive()
         if message is not None:
-            Message_Breakdown(message)
+            Message_Contents_Parsed = Message_Breakdown(message)
             for sock in list_of_sockets:
-                if not sock.closed:
+                if not sock.closed and Message_Contents_Parsed == 0:
                     sock.send(json.dumps(student_queue.get_all_info()))
+                else:
+                    sock.send(json.dumps(Message_Contents_Parsed)) # This represents the amount of Active TAs Returned as a JSON String
                     # sock.send(json.dumps({Cards_Backlog})) #tells all sockets to put this in.
     list_of_sockets.remove(socket)
 
@@ -113,12 +116,20 @@ def Message_Breakdown(message):
     if Card_Action == "Remove":
         #Tillo Does Remove Here
         student_queue.admit_next()
+        return 0
         # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}]
     if Card_Action == "Add":
         #Tillo Does Add Here
+        Card_Label = MongoBase.cleansing([Card_Label])[0]
+        Card_Person_Name = MongoBase.cleansing([Card_Person_Name])[0]
+        Card_Issue = MongoBase.cleansing([Card_Issue])[0]
         tic = Ticket(Card_Label, Card_Person_Name, Card_Issue)
         student_queue.insert(tic)
+        return 0
         # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}]
+    if Card_Action == "Active TAs":
+        TAs = MongoBase.studentFind()
+        return TAs
 
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 sockets = Sockets(app)
