@@ -64,7 +64,7 @@ class PriorityQueue:
             if prios >= 0:
                 self.q[prios] = updated
 
-    def oneTicket(self):
+    def uniqueTicket(self):
         unique = True
         name = self.get_name()
         for ticket in self.q:
