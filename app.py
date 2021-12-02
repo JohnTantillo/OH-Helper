@@ -46,7 +46,7 @@ def Password_Reset_Handle():
 
 @html.route('/getStudents', methods=(["post"]))
 def studentGetter():
-    Students = MongoBase.studentFind()
+    Students = MongoBase.OnlineFind()
     return json.dumps(Students) #Format is "{'online_students': [studentObject]}"
 
  #This is an alternate version to cards
@@ -97,8 +97,7 @@ def socket_helper(socket):
                 if not sock.closed and Message_Contents_Parsed == 0:
                     sock.send(json.dumps(student_queue.get_all_info()))
                 else:
-                    sock.send(json.dumps(Message_Contents_Parsed)) # This represents the amount of Active TAs Returned as a JSON String
-                    # sock.send(json.dumps({Cards_Backlog})) #tells all sockets to put this in.
+                    sock.send(json.dumps({'Active/online TAs': Message_Contents_Parsed})) # This represents the amount of Active TAs Returned as a JSON String
     list_of_sockets.remove(socket)
 
 
@@ -119,13 +118,13 @@ def Message_Breakdown(message):
         # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}]
     if Card_Action == "Add":
         #Tillo Does Add Here
-        Cleansed_Card = [Card_Label, Card_Person_Name, Card_Issue]
+        Cleansed_Card = MongoBase.cleansing([Card_Label, Card_Person_Name, Card_Issue])
         tic = Ticket(Cleansed_Card[0], Cleansed_Card[1], Cleansed_Card[2])
         student_queue.insert(tic)
         return 0
         # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}]
     if Card_Action == "Active TAs":
-        TAs = MongoBase.studentFind()
+        TAs = MongoBase.OnlineFind()
         return TAs
 
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
