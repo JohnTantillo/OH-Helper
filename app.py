@@ -127,6 +127,15 @@ def Message_Breakdown(message):
     if Card_Action == "Active TAs":
         TAs = MongoBase.OnlineFind()
         return TAs
+    if Card_Action == "Student Remove":
+        Cleansed_Card = [Card_Label, Card_Person_Name, Card_Issue]
+        tic = Ticket(Cleansed_Card[0], Cleansed_Card[1], Cleansed_Card[2])
+        n = tic.get_name()
+        student_queue.remove(n)
+
+
+
+        
 
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 sockets = Sockets(app)
