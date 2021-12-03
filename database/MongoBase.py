@@ -85,7 +85,7 @@ def accType_Update(Email, accType):
     User_Pointer.update_one({"Email": Email}, {"$set": {"accType": accType}})
     return True
 
-def studentFind():
+def OnlineFind():
     Userinfo = User_Pointer.find({"Online": "True"})
     Names = []
     for i in Userinfo:
@@ -136,8 +136,8 @@ def log_in(Email, Password):
 
 def cleansing(inputs):
     sanitized = []
+    disable = False
     for i in inputs:
-        print(i)
         indsanitized = ""
         disable = False
         for ind in i:
