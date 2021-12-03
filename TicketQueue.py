@@ -15,10 +15,16 @@ class Ticket:
     def get_message(self):
         return self.message
 
+    def set_prios(self, prios):
+        self.prios = prios
+
     def to_string(self):
         print("Name: " + self.get_name())
         print("Priority: " + str(self.get_prios()))
         print("Issue: " + self.get_message())
+
+    def equals(self, tic):
+        return (self.prios == tic.prios) and (self.name == tic.name) and (self.message == tic.message)
 
 class PriorityQueue:
     def __init__(self, q):
@@ -28,9 +34,9 @@ class PriorityQueue:
 
     def insert(self, tic):
         priority = int(tic.get_prios())
-        print(priority)
-        ticket_queue = self.q[priority]
-        ticket_queue.put(tic)
+        if self.uniqueTicket():
+            ticket_queue = self.q[priority]
+            ticket_queue.put(tic)
 
     def admit_next(self):
         ind = 0
@@ -59,7 +65,7 @@ class PriorityQueue:
             while not q.empty():
                 tic = q.get()
                 prios = tic.get_prios()
-                if student != tic.get_name():
+                if not student.equals(tic):
                     updated.put(tic)
             if prios >= 0:
                 self.q[prios] = updated
@@ -71,17 +77,23 @@ class PriorityQueue:
             if ticket.getname() == name:
                 unique = False
         return unique    
+    def update_priority(self, tic, new_prios):
+        self.remove(tic)
+        tic.set_prios(new_prios)
+        self.insert(tic)
 
 if __name__ == "__main__":
-    tix = Ticket(1, 'Johntant', 'This is a test')
-    tix2 = Ticket(0, 'Me', 'This should be the correct message')
+    tix = Ticket(2, 'Johntant', 'This is a test')
+
+    tix2 = Ticket(1, 'Me', 'This should be the correct message')
     pq = PriorityQueue([])
     pq.insert(tix)
+    # # print(pq.admit_next().get_message())
     pq.insert(tix2)
-    # print(pq.admit_next().get_message())
-    # pq.insert(tix2)
     print(pq.get_all_info())
-    pq.remove('Him')
+    pq.update_priority(tix, 0)
     print(pq.get_all_info())
-    pq2 = PriorityQueue([])
-    print(pq2.admit_next())
+    # pq.remove('Him')
+    # print(pq.get_all_info())
+    # pq2 = PriorityQueue([])
+    # print(pq2.admit_next())
