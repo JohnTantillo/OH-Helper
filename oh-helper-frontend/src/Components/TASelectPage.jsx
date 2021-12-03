@@ -17,7 +17,7 @@ export default class TASelectPage extends React.Component {
       body: JSON.stringify(""),
     })
       .then((response) => {
-        if (response.status === 404 || response.status === 500) {
+        if (response.ok === false) {
           alert("Error: Couldn't connect to server");
           return "";
         } else {
