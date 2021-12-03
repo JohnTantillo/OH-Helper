@@ -20,9 +20,10 @@ class TeacherView extends React.Component {
 
   componentDidMount() {
     try {
-      socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
+      //socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
+      socket = new WebSocket("ws://localhost:3000/websocket");
     } catch (error) {
-      alert("Error: Cannot establish websocket connection")
+      alert("Error: Cannot establish websocket connection");
     }
 
     socket.addEventListener("open", (event) => {
@@ -53,6 +54,10 @@ class TeacherView extends React.Component {
     socket.send(JSON.stringify(ticketData));
   };
 
+  updatePriority = (ticketData) => {
+    socket.send(JSON.stringify(ticketData));
+  };
+
   render() {
     return (
       <div className="teacherViewContainer">
@@ -68,12 +73,19 @@ class TeacherView extends React.Component {
                     priority={ticket.Priority}
                     priorityLevels={this.state.priorityLevels}
                     acceptFunction={this.acceptTicket}
+                    updateFunction={this.updatePriority}
+                    admin={true}
                   />
                 );
               })}
             </div>
             <div className="acceptButtonContainer">
-              <Button active={true} text="Accept Next" onclick={this.acceptTicket} buttonType="acceptButton"/>
+              <Button
+                active={true}
+                text="Accept Next"
+                onclick={this.acceptTicket}
+                buttonType="acceptButton"
+              />
             </div>
           </div>
         </div>

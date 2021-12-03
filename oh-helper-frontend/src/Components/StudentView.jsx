@@ -22,11 +22,12 @@ class StudentView extends React.Component {
 
   componentDidMount() {
     try {
-      socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
+      //socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
+      socket = new WebSocket("ws://localhost:3000/websocket");
     } catch (error) {
-      alert("Error: Cannot establish websocket connection")
+      alert("Error: Cannot establish websocket connection");
     }
-    
+
     socket.addEventListener("open", (event) => {
       console.log("Websocket Connected!");
     });
@@ -109,6 +110,7 @@ class StudentView extends React.Component {
                   question={ticket.Message}
                   priority={ticket.Priority}
                   priorityLevels={this.state.priorityLevels}
+                  admin={false}
                 ></Ticket>
               );
             })}

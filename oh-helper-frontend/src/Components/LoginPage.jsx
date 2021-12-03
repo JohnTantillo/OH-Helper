@@ -29,9 +29,11 @@ class LoginPage extends React.Component {
     fetch("/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, password: pass, salt:""}),
+      body: JSON.stringify({ email: email, password: pass, salt: "" }),
     })
-      .then((response) => response.ok ? response.json() : alert("Error connecting to server"))
+      .then((response) =>
+        response.ok ? response.json() : alert("Error connecting to server")
+      )
       .then((success) => {
         if (success !== "") {
           if (success.AccType === "teacher") {
@@ -83,7 +85,15 @@ class LoginPage extends React.Component {
               placeholder="Password..."
               onChange={this.passwordOnChange}
             />
-            <RouteButton active={true} route="/forgotPassword" onclick={()=>{return true;}} text="Forgot Password?" buttonType="forgotPasswordLink"/>
+            <RouteButton
+              active={true}
+              route="/forgotPassword"
+              onclick={() => {
+                return true;
+              }}
+              text="Forgot Password?"
+              buttonType="forgotPasswordLink"
+            />
             <Button
               active={true}
               onclick={this.login}
