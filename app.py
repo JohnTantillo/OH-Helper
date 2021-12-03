@@ -112,6 +112,12 @@ def Message_Breakdown(message):
     Card_Action = dejsonify["Action"]
     #Tillos function call / jazz with these things
     #With the output getting sent in a message looking like the following #HEADS UP JOHN
+    if Card_Action == "Update":
+        Card_Label = MongoBase.cleansing([Card_Label])[0]
+        Card_Person_Name = MongoBase.cleansing([Card_Person_Name])[0]
+        Card_Issue = MongoBase.cleansing([Card_Issue])[0]
+        tic = Ticket(Card_Label, Card_Person_Name, Card_Issue)
+        student_queue.update_priority(tic, 0) # NEED TO RECIEVE NEW PRIORITY HERE SOMEHOW, PUTTING 0 AS PLACEHOLDER (@DUNASKE)
     if Card_Action == "Remove":
         #Tillo Does Remove Here
         student_queue.admit_next()
