@@ -22,8 +22,8 @@ class StudentView extends React.Component {
 
   componentDidMount() {
     try {
-      //socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
-      socket = new WebSocket("ws://localhost:3000/websocket");
+      socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
+      //socket = new WebSocket("ws://localhost:3000/websocket");
     } catch (error) {
       alert("Error: Cannot establish websocket connection");
     }

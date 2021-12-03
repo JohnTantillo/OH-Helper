@@ -10,8 +10,8 @@ import os
 import sys
 import hashlib
 from random import randint
-username = "heroku_online"#os.environ['DB_NAME']
-password = "yBxnSDgTbS2fUYSE"#os.environ['DB_PASS']
+username = os.environ['DB_NAME']
+password = os.environ['DB_PASS']
 client = pymongo.MongoClient("mongodb+srv://heroku_online:" + password +"@cluster0.hok05.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 
 # client = pymongo.MongoClient('localhost') #Mongo DB setup for Local host
