@@ -31,7 +31,7 @@ class LoginPage extends React.Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: email, password: pass, salt:""}),
     })
-      .then((response) => response.ok ? response.json() : alert("Error connecting to server"))
+      .then((response) => response !== "" ? response.json() : "")
       .then((success) => {
         if (success !== "") {
           if (success.AccType === "teacher") {

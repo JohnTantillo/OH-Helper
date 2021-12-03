@@ -64,14 +64,6 @@ class PriorityQueue:
             if prios >= 0:
                 self.q[prios] = updated
 
-    def uniqueTicket(self):
-        unique = True
-        name = self.get_name()
-        for ticket in self.q:
-            if ticket.getname() == name:
-                unique = False
-        return unique    
-
 if __name__ == "__main__":
     tix = Ticket(1, 'Johntant', 'This is a test')
     tix2 = Ticket(0, 'Me', 'This should be the correct message')

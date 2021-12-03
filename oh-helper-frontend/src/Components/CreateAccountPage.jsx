@@ -43,7 +43,7 @@ export default class CreateAccountPage extends React.Component {
         salt: "",
         accType: accType,
       }),
-    }).then((response) => response.ok ? {} : alert("Error connecting to server"))
+    });
     return success;
   };
 

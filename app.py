@@ -46,7 +46,7 @@ def Password_Reset_Handle():
 
 @html.route('/getStudents', methods=(["post"]))
 def studentGetter():
-    Students = MongoBase.OnlineFind()
+    Students = MongoBase.studentFind()
     return json.dumps(Students) #Format is "{'online_students': [studentObject]}"
 
  #This is an alternate version to cards
@@ -92,12 +92,11 @@ def socket_helper(socket):
     while not socket.closed:                            # While this socket is not closed do the following
         message = socket.receive()
         if message is not None:
-            Message_Contents_Parsed = Message_Breakdown(message)
+            Message_Breakdown(message)
             for sock in list_of_sockets:
-                if not sock.closed and Message_Contents_Parsed == 0:
+                if not sock.closed:
                     sock.send(json.dumps(student_queue.get_all_info()))
-                else:
-                    sock.send(json.dumps({'Active/online TAs': Message_Contents_Parsed})) # This represents the amount of Active TAs Returned as a JSON String
+                    # sock.send(json.dumps({Cards_Backlog})) #tells all sockets to put this in.
     list_of_sockets.remove(socket)
 
 
@@ -114,28 +113,12 @@ def Message_Breakdown(message):
     if Card_Action == "Remove":
         #Tillo Does Remove Here
         student_queue.admit_next()
-        return 0
         # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}]
     if Card_Action == "Add":
         #Tillo Does Add Here
-        Cleansed_Card = [Card_Label, Card_Person_Name, Card_Issue]
-        print(Cleansed_Card)
-        tic = Ticket(Cleansed_Card[0], Cleansed_Card[1], Cleansed_Card[2])
+        tic = Ticket(Card_Label, Card_Person_Name, Card_Issue)
         student_queue.insert(tic)
-        return 0
         # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}]
-    if Card_Action == "Active TAs":
-        TAs = MongoBase.OnlineFind()
-        return TAs
-    if Card_Action == "Student Remove":
-        Cleansed_Card = [Card_Label, Card_Person_Name, Card_Issue]
-        tic = Ticket(Cleansed_Card[0], Cleansed_Card[1], Cleansed_Card[2])
-        n = tic.get_name()
-        student_queue.remove(n)
-
-
-
-        
 
 app = Flask(__name__, static_folder="oh-helper-frontend/build/", static_url_path="/")
 sockets = Sockets(app)
