@@ -118,7 +118,8 @@ def Message_Breakdown(message):
         # Cards_Backlog = [{"Name": Card_Person_Name, "Question": Card_Issue, "Label": Card_Label, "Priority": "1"}]
     if Card_Action == "Add":
         #Tillo Does Add Here
-        Cleansed_Card = MongoBase.cleansing([Card_Label, Card_Person_Name, Card_Issue])
+        Cleansed_Card = [Card_Label, Card_Person_Name, Card_Issue]
+        print(Cleansed_Card)
         tic = Ticket(Cleansed_Card[0], Cleansed_Card[1], Cleansed_Card[2])
         student_queue.insert(tic)
         return 0
