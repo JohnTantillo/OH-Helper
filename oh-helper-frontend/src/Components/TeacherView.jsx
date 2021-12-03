@@ -19,7 +19,11 @@ class TeacherView extends React.Component {
   }
 
   componentDidMount() {
-    socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
+    try {
+      socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
+    } catch (error) {
+      alert("Error: Cannot establish websocket connection")
+    }
 
     socket.addEventListener("open", (event) => {
       console.log("Websocket Connected!");

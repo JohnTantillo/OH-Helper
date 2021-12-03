@@ -21,16 +21,23 @@ class StudentView extends React.Component {
   }
 
   componentDidMount() {
-    socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
-
+    try {
+      socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
+    } catch (error) {
+      alert("Error: Cannot establish websocket connection")
+    }
+    
     socket.addEventListener("open", (event) => {
       console.log("Websocket Connected!");
     });
 
     socket.addEventListener("message", (event) => {
       var data = JSON.parse(event.data);
-      console.log(data);
-      this.setState({ ticket: data["Queue"] });
+      if (Object.keys(data).includes("Queue")) {
+        this.setState({ ticket: data["Queue"] });
+      } else {
+        this.setState({ activeTAs: data["activeTAs"] });
+      }
     });
 
     socket.addEventListener("close", (event) => {
