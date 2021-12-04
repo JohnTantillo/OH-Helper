@@ -24,7 +24,7 @@ class Ticket:
         print("Issue: " + self.get_message())
 
     def equals(self, tic):
-        return (self.prios == tic.prios) and (self.name == tic.name) and (self.message == tic.message)
+        return (self.name == tic.name) and (self.message == tic.message)
 
 class PriorityQueue:
     def __init__(self, q):
