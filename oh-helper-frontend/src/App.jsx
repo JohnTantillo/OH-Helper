@@ -22,6 +22,10 @@ class App extends React.Component {
     this.setState({ loggedIn: login, student: student, name: name });
   };
 
+  logout = () => {
+    this.setState({ loggedIn: false, student: true, name: ""});
+  }
+
   render() {
     return (
       <Router basename={process.env.PUBLIC_URL}>
@@ -40,9 +44,9 @@ class App extends React.Component {
               <Route path="/">
                 {this.state.loggedIn ? (
                   this.state.student ? (
-                    <StudentView name={this.state.name} /> //TODO: maybe redirects instead?
+                    <StudentView name={this.state.name} logout={this.logout}/> //TODO: maybe redirects instead?
                   ) : (
-                    <TeacherView name={this.state.name} /> //TODO: maybe redirects instead?
+                    <TeacherView name={this.state.name} logout={this.logout}/> //TODO: maybe redirects instead?
                   )
                 ) : (
                   <LoginPage loginFlag={this.setLoginFlag} /> //TODO: maybe redirects instead?

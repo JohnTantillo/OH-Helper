@@ -98,6 +98,10 @@
   font-weight: 600 !important;
 }
 
+.backButton:hover {
+  background-color: rgba(196, 126, 75, 0.83) !important;
+}
+
 .selectedButton {
   background-color: rgba(117, 116, 115, 0.69) !important;
   width: 15vw;

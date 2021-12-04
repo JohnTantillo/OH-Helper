@@ -117,7 +117,10 @@ class StudentView extends React.Component {
           </div>
         </div>
         <div className="rightMasterStudent">
-          <div className="welcomeStudent">{"Welcome, " + this.props.name}</div>
+          <div className="welcomeStudent">
+            {"Welcome, " + this.props.name}
+            <Button active={true} text="Logout" buttonType="logoutButtonStudent" onclick={this.props.logout}></Button>
+          </div>
           <div className="activeTA headerText">Active TA's</div>
           <div className="activeTAWindow">
             {this.state.activeTAs.map((ta) => {

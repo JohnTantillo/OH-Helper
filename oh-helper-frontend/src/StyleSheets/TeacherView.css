@@ -48,7 +48,7 @@
 .acceptButton {
   width: 15vw;
   height: 6vh;
-  font-size: 3vmin;
+  font-size: 3.5vmin;
   background-color: rgba(60, 214, 137, 0.69) !important;
 }
 
@@ -106,10 +106,25 @@
 
 .accountNameTeacher {
   color: var(--header-color);
-  margin: 0;
+  margin-top: 1.5vh;
   font-family: var(--general-font);
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
   font-size: 3vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.logoutButton {
+  width: 6vw;
+  height: 3.5vh;
+  margin-left: 10vw !important;
+  color: var(--header-color);
+  font-family: var(--general-font);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), var(--text-outline);
+  font-size: 2.5vmin;
+  font-weight: 500 !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,6 +134,12 @@
   width: 60vw;
   height: 80vh;
   overflow-y: scroll;
+}
+
+.teacherLine {
+  margin-top: 1vh !important;
+  margin-bottom: 0.5vh !important;
+  width: 33vw !important;
 }
 
 .search {
@@ -145,6 +166,14 @@
   padding-top: 2vh;
   width: 33vw;
   height: 76.5vh;
+}
+
+.taButton:hover {
+  background-color: rgba(196, 126, 75, 0.83) !important;
+}
+
+.search:hover {
+  background-color: rgba(196, 126, 75, 0.83) !important;
 }
 
 .ticketStorage::-webkit-scrollbar {

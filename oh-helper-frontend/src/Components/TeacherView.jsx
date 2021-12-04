@@ -92,7 +92,9 @@ class TeacherView extends React.Component {
         <div className="rightMaster">
           <div className="accountNameTeacher">
             {"Welcome, " + this.props.name}
+            <Button active={true} text="Logout" buttonType="logoutButton" onclick={this.props.logout}></Button>
           </div>
+          <div className="lineBreak teacherLine"></div>
           <div className="studentSearchHeader">Student Search:</div>
           <input
             className="studentSearchBar"

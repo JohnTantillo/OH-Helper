@@ -47,7 +47,7 @@ class LoginPage extends React.Component {
           this.props.loginFlag(false, false, "");
         }
       });
-    //this.props.loginFlag(true, false, "Jesse Hartloff");
+    //this.props.loginFlag(true, true, "John Dunaske");
     return true;
   };
 
