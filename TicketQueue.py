@@ -34,7 +34,7 @@ class PriorityQueue:
 
     def insert(self, tic):
         priority = int(tic.get_prios())
-        if self.uniqueTicket():
+        if self.uniqueTicket(tic):
             ticket_queue = self.q[priority]
             ticket_queue.put(tic)
 
