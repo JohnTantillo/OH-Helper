@@ -96,7 +96,7 @@ def socket_helper(socket):
             for sock in list_of_sockets:
                 if not sock.closed and Message_Contents_Parsed == 0:
                     sock.send(json.dumps(student_queue.get_all_info()))
-                else:
+                elif not sock.closed:
                     sock.send(json.dumps({'Active/online TAs': Message_Contents_Parsed})) # This represents the amount of Active TAs Returned as a JSON String
     list_of_sockets.remove(socket)
 
@@ -112,7 +112,8 @@ def Message_Breakdown(message):
     #Tillos function call / jazz with these things
     #With the output getting sent in a message looking like the following #HEADS UP JOHN
     if Card_Action == "Update":
-        tic = Ticket(Card_Label, Card_Person_Name, Card_Issue)
+        Cleansed_Card = [Card_Label, Card_Person_Name, Card_Issue]
+        tic = Ticket(Cleansed_Card[0], Cleansed_Card[1], Cleansed_Card[2])
         student_queue.update_priority(tic) # NEED TO RECIEVE NEW PRIORITY HERE SOMEHOW, PUTTING 0 AS PLACEHOLDER (@DUNASKE)
         return 0
     if Card_Action == "Remove":
@@ -134,8 +135,9 @@ def Message_Breakdown(message):
     if Card_Action == "Student Remove":
         Cleansed_Card = [Card_Label, Card_Person_Name, Card_Issue]
         tic = Ticket(Cleansed_Card[0], Cleansed_Card[1], Cleansed_Card[2])
-        n = tic.get_name()
-        student_queue.remove(n)
+        # n = tic.get_name()
+        student_queue.remove(tic)
+        return 0
 
 
 
