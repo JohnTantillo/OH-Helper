@@ -29,7 +29,7 @@ class PriorityQueue:
     def insert(self, tic):
         priority = int(tic.get_prios())
         print(priority)
-        if self.uniqueTicket():
+        if self.uniqueTicket(tic):
             ticket_queue = self.q[priority]
             ticket_queue.put(tic)
 
@@ -65,11 +65,11 @@ class PriorityQueue:
             if prios >= 0:
                 self.q[prios] = updated
 
-    def uniqueTicket(self):
+    def uniqueTicket(self, ticket):
         unique = True
-        name = self.get_name()
-        for ticket in self.q:
-            if ticket.getname() == name:
+        name = ticket.get_name()
+        for item in self.q:
+            if item.getname() == name:
                 unique = False
         return unique    
 
