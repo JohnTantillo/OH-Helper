@@ -70,9 +70,8 @@ class PriorityQueue:
             if prios >= 0:
                 self.q[prios] = updated
 
-    def update_priority(self, tic, new_prios):
+    def update_priority(self, tic):
         self.remove(tic)
-        tic.set_prios(new_prios)
         self.insert(tic)
         
     def uniqueTicket(self, tic):
