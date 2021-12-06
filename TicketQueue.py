@@ -79,21 +79,22 @@ class PriorityQueue:
         unique = True
         name = tic.get_name()
         for item in self.q:
-            if self.get_name(item) == name:
-                unique = False
+            for ticket in item.queue:
+                if ticket.get_name() == name:
+                    unique = False
         return unique    
 
 if __name__ == "__main__":
     tix = Ticket(2, 'Johntant', 'This is a test')
 
-    tix2 = Ticket(1, 'Me', 'This should be the correct message')
+    # tix2 = Ticket(1, 'Me', 'This should be the correct message')
     pq = PriorityQueue([])
     pq.insert(tix)
-    # # print(pq.admit_next().get_message())
-    pq.insert(tix2)
-    print(pq.get_all_info())
-    pq.update_priority(tix, 0)
-    print(pq.get_all_info())
+    # # # print(pq.admit_next().get_message())
+    # pq.insert(tix2)
+    # print(pq.get_all_info())
+    # pq.update_priority(tix, 0)
+    # print(pq.get_all_info())
     # pq.remove('Him')
     # print(pq.get_all_info())
     # pq2 = PriorityQueue([])
