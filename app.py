@@ -114,7 +114,7 @@ def Message_Breakdown(message):
     if Card_Action == "Update":
         Cleansed_Card = [Card_Label, Card_Person_Name, Card_Issue]
         tic = Ticket(Cleansed_Card[0], Cleansed_Card[1], Cleansed_Card[2])
-        student_queue.update_priority(tic) # NEED TO RECIEVE NEW PRIORITY HERE SOMEHOW, PUTTING 0 AS PLACEHOLDER (@DUNASKE)
+        student_queue.update_priority(tic)
         return 0
     if Card_Action == "Remove":
         #Tillo Does Remove Here
@@ -124,7 +124,7 @@ def Message_Breakdown(message):
     if Card_Action == "Add":
         #Tillo Does Add Here
         Cleansed_Card = [Card_Label, Card_Person_Name, Card_Issue]
-        print(Cleansed_Card)
+        # print(Cleansed_Card)
         tic = Ticket(Cleansed_Card[0], Cleansed_Card[1], Cleansed_Card[2])
         student_queue.insert(tic)
         return 0
@@ -138,6 +138,7 @@ def Message_Breakdown(message):
         # n = tic.get_name()
         student_queue.remove(tic)
         return 0
+    return 0
 
 
 
