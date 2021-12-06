@@ -45,13 +45,13 @@ class StudentView extends React.Component {
     });
 
     socket.addEventListener("message", (event) => {
+      this.setState({ ticket: []});
       var data = JSON.parse(event.data);
-      if (Object.keys(data).includes("Queue")) {
-        this.setState({ ticket: data["Queue"] });
-      } else {
-        this.setState({ activeTAs: data["activeTAs"] });
-      }
-      this.forceUpdate()
+      //if (Object.keys(data).includes("Queue")) {
+      this.setState({ ticket: data["Queue"] });
+      // } else {
+      //   this.setState({ activeTAs: data["activeTAs"] });
+      // }
     });
 
     socket.addEventListener("close", (event) => {

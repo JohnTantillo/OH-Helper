@@ -42,10 +42,10 @@ class TeacherView extends React.Component {
     });
 
     socket.addEventListener("message", (event) => {
+      this.setState({ ticket: []});
       var data = JSON.parse(event.data);
       console.log(data);
       this.setState({ ticket: data.Queue });
-      this.forceUpdate()
     });
 
     socket.addEventListener("close", (event) => {
