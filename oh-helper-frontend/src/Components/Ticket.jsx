@@ -40,6 +40,17 @@ export default class Ticket extends React.Component {
     this.props.updateFunction(ticketData);
   };
 
+  removeStudent = () => {
+    //this.setState({ currentPriority: this.state.newPriority });
+    var ticketData = {
+      Name: this.props.name,
+      Issue: this.props.question,
+      Label: this.props.priority,
+      Action: "Student Remove",
+    };
+    this.props.updateFunction(ticketData);
+  };
+
   render() {
     return (
       <div className="questionWindow">
@@ -70,6 +81,16 @@ export default class Ticket extends React.Component {
               text="Update"
               buttonType="changePriorityButton"
               onclick={this.setPriority}
+            ></Button>
+          ) : (
+            <div />
+          )}
+          {this.props.admin ? (
+            <Button
+              active={true}
+              text="Remove"
+              buttonType="removeButton"
+              onclick={this.removeStudent}
             ></Button>
           ) : (
             <div />
