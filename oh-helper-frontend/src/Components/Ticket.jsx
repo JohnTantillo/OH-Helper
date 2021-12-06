@@ -30,7 +30,7 @@ export default class Ticket extends React.Component {
   };
 
   setPriority = () => {
-    this.setState({ currentPriority: this.state.newPriority });
+    //this.setState({ currentPriority: this.state.newPriority });
     var ticketData = {
       Name: this.props.name,
       Issue: this.props.question,
