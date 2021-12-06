@@ -70,18 +70,18 @@ class PriorityQueue:
             if prios >= 0:
                 self.q[prios] = updated
 
-    def uniqueTicket(self):
-        return True
-        # unique = True
-        # name = self.get_name()
-        # for ticket in self.q:
-        #     if ticket.getname() == name:
-        #         unique = False
-        # return unique
     def update_priority(self, tic, new_prios):
         self.remove(tic)
         tic.set_prios(new_prios)
         self.insert(tic)
+        
+    def uniqueTicket(self, tic):
+        unique = True
+        name = tic.get_name()
+        for item in self.q:
+            if item.get_name() == name:
+                unique = False
+        return unique    
 
 if __name__ == "__main__":
     tix = Ticket(2, 'Johntant', 'This is a test')
