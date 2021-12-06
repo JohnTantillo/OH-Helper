@@ -39,6 +39,7 @@ class StudentView extends React.Component {
       } else {
         this.setState({ activeTAs: data["activeTAs"] });
       }
+      this.forceUpdate()
     });
 
     socket.addEventListener("close", (event) => {
