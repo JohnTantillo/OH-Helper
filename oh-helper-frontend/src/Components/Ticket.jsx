@@ -34,7 +34,7 @@ export default class Ticket extends React.Component {
     var ticketData = {
       Name: this.props.name,
       Issue: this.props.question,
-      Label: this.state.currentPriority,
+      Label: this.state.newPriority,
       Action: "Update",
     };
     this.props.updateFunction(ticketData);
