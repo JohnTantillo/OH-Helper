@@ -20,6 +20,10 @@ class StudentView extends React.Component {
     };
   }
 
+  sendPing = () => {
+    socket.send("Ping");
+  }
+
   componentDidMount() {
     try {
       socket = new WebSocket("wss://team-placeholder-oh.herokuapp.com/websocket");
@@ -30,6 +34,7 @@ class StudentView extends React.Component {
 
     socket.addEventListener("open", (event) => {
       console.log("Websocket Connected!");
+      setTimeout(this.sendPing, 5000);
     });
 
     socket.addEventListener("message", (event) => {
