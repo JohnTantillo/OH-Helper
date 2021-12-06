@@ -20,8 +20,15 @@ class StudentView extends React.Component {
     };
   }
 
+ 
   sendPing = () => {
-    socket.send(JSON.stringify("Ping"));
+    var ticketData = {
+      Name: "",
+      Issue: "",
+      Label: "",
+      Action: "Ping",
+    };
+    socket.send(JSON.stringify(ticketData));
   }
 
   componentDidMount() {
