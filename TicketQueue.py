@@ -67,7 +67,7 @@ class PriorityQueue:
                 prios = tic.get_prios()
                 if not student.equals(tic):
                     updated.put(tic)
-            if prios >= 0:
+            if int(prios) >= 0:
                 self.q[prios] = updated
 
     def update_priority(self, tic):
