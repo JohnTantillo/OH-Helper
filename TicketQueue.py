@@ -79,7 +79,7 @@ class PriorityQueue:
         unique = True
         name = tic.get_name()
         for item in self.q:
-            if item.get_name() == name:
+            if self.get_name(item) == name:
                 unique = False
         return unique    
 
